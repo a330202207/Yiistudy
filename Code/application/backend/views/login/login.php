@@ -22,7 +22,7 @@ use yii\bootstrap\ActiveForm;
                                    autocomplete="off" placeholder="密码" name="password" required/>
                         </div>
                         <div class="col-xs-6">
-                            <input class="form-control form-control-solid placeholder-no-fix" type="password"
+                            <input class="form-control form-control-solid placeholder-no-fix" type="text"
                                    autocomplete="off" placeholder="验证码" name="password" required/>
                         </div>
                     </div>
