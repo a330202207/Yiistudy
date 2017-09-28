@@ -205,7 +205,7 @@
     text-align: center;
 }
 
-.login-box .layui-input[type='number'] {
+.login-box .layui-input[lay-verify='code'] {
     display: inline-block;
     width: 50%;
     vertical-align: top;
