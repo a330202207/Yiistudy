@@ -20,9 +20,11 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body class="login-body body">
+<body class="login-body body skin-0">
 <?php $this->beginBody() ?>
-<?= $content ?>
+    <div class="layui-layout layui-layout-admin">
+        <?= $content ?>
+    </div>
 <?php $this->endBody() ?>
 </body>
 </html>

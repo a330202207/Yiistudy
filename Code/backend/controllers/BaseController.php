@@ -3,6 +3,8 @@ namespace backend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\helpers\Json;
+use common\helpers\FuncHelper;
 
 class BaseController extends Controller
 {
@@ -31,6 +33,23 @@ class BaseController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    /**
+     * 规范 ajax 输出
+     */
+    public function resAjax($data)
+    {
+        if (!isset($data['code'])) {
+            $res = [];
+            $res['code'] = isset($data['code']) ? $data['code'] : 1;
+            $res['errCode'] = isset($data['errCode']) ? $data['errCode'] : '0000';
+            $res['data'] = isset($data['data']) && is_string($data['data']) ? $data['data'] : '';
+            $res['msg'] = isset($data['msg']) ? $data['msg'] : 'unknown error';
+        } else {
+            $res = $data;
+        }
+        return Json::encode($res);
     }
 
 /*    public function beforeAction($action)

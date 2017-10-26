@@ -2,37 +2,33 @@
 namespace backend\model;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\web\IdentityInterface;
 use common\models\BaseActiveRecord;
+use common\models\BackendBaseModel;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
- * 实现User组件中的身份识别类 参见 yii\web\user
- * This is the model class for table "{{%admin}}".
+ * User model
  *
- * @property string $id
+ * @property integer $id
  * @property string $username
- * @property string $password
- * @property string $salt
+ * @property string $password_hash
+ * @property string $password_reset_token
  * @property string $email
- * @property string $mobile
- * @property string $create_time
- * @property string $create_ip
- * @property string $last_login_time
- * @property string $last_login_ip
- * @property string $update_time
+ * @property string $auth_key
  * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $password write-only password
  */
-class Admin extends BaseActiveRecord implements IdentityInterface
+class User extends BaseActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%admin}}';
+        return '{{%user}}';
     }
 
     /**
@@ -41,13 +37,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            'timestamp'=>[
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['update_time']
-                ]
-            ]
+            TimestampBehavior::className(),
         ];
     }
 
@@ -57,42 +47,13 @@ class Admin extends BaseActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'salt', 'email'], 'required'],
-            [['create_time', 'create_ip', 'last_login_time', 'last_login_ip', 'update_time', 'status', 'is_del'], 'integer'],
-            [['username'], 'string', 'max' => 16],
-            [['password'], 'string', 'max' => 60],
-            [['salt', 'email'], 'string', 'max' => 32],
-            [['mobile'], 'string', 'max' => 15],
-            [['username'], 'unique'],
-            [['email'], 'unique']
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
     /**
      * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Id',
-            'role_id' => 'Role Id',
-            'username' => 'Username',
-            'password' => 'Password',
-            'salt' => 'Salt',
-            'email' => 'Email',
-            'mobile' => 'Mobile',
-            'create_time' => 'Create Time',
-            'update_time' => 'Update Time',
-            'create_ip' => 'Create Ip',
-            'last_login_time' => 'Last Login Time',
-            'last_login_ip' => 'Last Login Ip',
-            'status' => 'Status',
-            'is_del' => 'Is Del',
-        ];
-    }
-
-    /**
-     * 根据ID获取账号信息
      */
     public static function findIdentity($id)
     {
@@ -104,11 +65,11 @@ class Admin extends BaseActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['accessToken' => $token]);
     }
 
     /**
-     * 根据用户名获取账号信息
+     * Finds user by username
      *
      * @param string $username
      * @return static|null
@@ -131,7 +92,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
         }
 
         return static::findOne([
-            'password' => $token,
+            'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
         ]);
     }
@@ -154,7 +115,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
     }
 
     /**
-     * 获取用户ID
+     * @inheritdoc
      */
     public function getId()
     {
@@ -166,7 +127,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->salt;
+        return $this->auth_key;
     }
 
     /**
@@ -178,32 +139,32 @@ class Admin extends BaseActiveRecord implements IdentityInterface
     }
 
     /**
-     * 验证密码
+     * Validates password
      *
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**
-     * 设置加密后的密码
+     * Generates password hash from password and sets it to the model
      *
      * @param string $password
      */
     public function setPassword($password)
     {
-        $this->password = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
-     * 设置密码干扰码
+     * Generates "remember me" authentication key
      */
     public function generateAuthKey()
     {
-        $this->salt = Yii::$app->security->generateRandomString();
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -211,7 +172,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
      */
     public function generatePasswordResetToken()
     {
-        $this->password = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     /**
@@ -219,6 +180,6 @@ class Admin extends BaseActiveRecord implements IdentityInterface
      */
     public function removePasswordResetToken()
     {
-        $this->password = null;
+        $this->password_reset_token = null;
     }
 }

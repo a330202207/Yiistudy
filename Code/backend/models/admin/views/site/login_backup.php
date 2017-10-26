@@ -32,7 +32,7 @@ use yii\captcha\Captcha;
             <label class="layui-form-label">密码：</label>
 
             <div class="layui-input-inline">
-                <?= $form->field($model, 'password')->textInput([
+                <?= $form->field($model, 'password')->passwordInput([
                     'class' => 'layui-input',
                     'autocomplete' => 'on',
                     'lay-verify' =>"account",
@@ -71,7 +71,7 @@ use yii\captcha\Captcha;
         </div>
         <div class="layui-form-item">
             <?= Html::resetButton('重置', ['class'=>'layui-btn layui-btn-danger btn-reset', 'name' =>'submit-button']) ?>
-            <?= Html::submitButton('立即登录', ['class' => 'layui-btn btn-submit', 'lay-filter' => 'sub', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('立即登录', ['class' => 'layui-btn btn-submit', 'lay-filter' => 'sub']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>

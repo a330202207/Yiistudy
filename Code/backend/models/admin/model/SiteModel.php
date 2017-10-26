@@ -1,13 +1,13 @@
 <?php
-namespace backend\model;
+namespace backend\models\admin\model;
 
 use Yii;
-use backend\models\Admin;
+use common\models\BackendBaseModel;
 
 /**
  * Login form
  */
-class SiteModel extends BaseModel
+class SiteModel extends BackendBaseModel
 {
 
 

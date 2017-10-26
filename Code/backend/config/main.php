@@ -1,10 +1,4 @@
 <?php
-$params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php')
-//    require(__DIR__ . '/params.php'),
-//    require(__DIR__ . '/params-local.php')
-);
 
 return [
     'id' => 'app-backend',
@@ -21,9 +15,10 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'backend\model\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'loginUrl' => ['admin/site/login'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
@@ -48,7 +43,22 @@ return [
             'rules' => [
             ],
         ],*/
-
+        /* 数据库RBAC权限控制 */
+        /*'authManager' => [
+            'class' => 'common\components\rbac\DbManager',
+        ],*/
+        /**
+         * 该属性允许你用一个数组定义多个 别名 代替 Yii::setAlias()
+         */
+//        'aliases' => [],
+        /**
+         * 通过配置文件附加行为，全局
+         */
+        /*'as rbac' => [
+            'class' => 'backend\behaviors\RbacBehavior',
+            'allowActions' => [
+                'site/login', 'site/logout', 'public*', 'debug/*', 'gii/*', // 不需要权限检测
+            ]
+        ],*/
     ],
-    'params' => $params,
 ];

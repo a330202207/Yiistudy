@@ -16,7 +16,10 @@ class AppAsset extends AssetBundle
         'static/css/style.css',
     ];
     public $js = [
-        'static/layui/layui.js',
+//        'static/layui/layui.js',
+        'static/layui/layui.all.js',
+        'static/js/index.js',
+        'static/admin/dialog.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

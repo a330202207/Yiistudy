@@ -10,6 +10,7 @@ layui.config({
     vip_nav: 'vip_nav'
     , vip_tab: 'vip_tab'
     , vip_table: 'vip_table'
+    , ajax_form: 'ajax_form'
 });
 
 // 主入口方法
