@@ -3,6 +3,8 @@
 namespace common\helpers;
 
 use Yii;
+use yii\web\Session;
+use backend\models\admin\model\RoleMapsModel;
 
 /**
  * 自定义辅助函数，处理其他杂项
@@ -18,13 +20,14 @@ class FuncHelper
      * @return void
      * ---------------------------------------
      */
-    public static function ajaxReturn($code = 0, $msg = 'success', $obj = '')
+    public static function ajaxReturn($code = 0, $msg = 'success', $err = '', $data = [])
     {
         /* api标准返回格式 */
         $json = array(
             'code' => $code,
             'msg'  => $msg,
-            'obj'  => $obj,
+            'err'  => $err,
+            'data' => $data ? $data : [],
         );
         header('Content-Type:application/json; charset=utf-8');
         exit(json_encode($json));
@@ -321,7 +324,7 @@ class FuncHelper
      * @param array
      * @return array
      */
-    function super_unique($array)
+    public static function super_unique($array)
     {
         $result = array_map("unserialize", array_unique(array_map("serialize", $array)));
 
@@ -333,6 +336,91 @@ class FuncHelper
         }
 
         return $result;
+    }
+
+    /**
+     *
+     *
+     * @param string $url $url URL表达式，格式：'[分组/模块/操作#锚点@域名]?参数1=值1&参数2=值2...'
+     * @param string $vars $vars 传入的参数，支持数组和字符串
+     * @param string $title $title  标题
+     * @param string $mini 是否异步加载
+     * @param string $class A标签或者button样式
+     * @param string $width
+     * @param string $height
+     * @param string $info
+     * @param string $type 默认返回a标签，传button返回button
+     * @return string
+     * @date
+     */
+    public static function BA($url = '', $vars = '', $title = '', $dialogType = "", $class = "", $width = '', $height = '', $info='' ,$type = '') {
+        static $admin;
+/*        $user_id = Yii::$app->user->identity->getId();
+        $session = Yii::$app->session;
+//        var_dump(Yii::app()->controller->id);die;
+        if(empty($admin)){
+            $model = new RoleMapsModel();
+            $admin['role_id'];
+            $admin['menu_list'] = $model->getMenuIdsByRoleId(2);
+            var_dump(Yii::$app->user->id);die;
+        }*/
+/*        if ($admin['role_id'] != 1) {
+            $menu = D('Manage/Menu')->fetchAll();
+            $urlArr = $tmp =  explode('/', $url);
+
+            $count = count($urlArr);
+            switch ($count){
+                case 1:
+                    $urlArr[0] = MODULE_NAME;
+                    $urlArr[1] = CONTROLLER_NAME;
+                    $urlArr[2] = $url;
+                    break;
+                case 2:
+                    $urlArr[0] = MODULE_NAME;
+                    $urlArr[1] = $tmp[0];
+                    $urlArr[2] = $tmp[1];
+                    break;
+            }
+            $url = implode('/', $urlArr);
+            $menu_id = 0;
+            foreach ($menu as $k => $v) {
+                if (strtolower($v['menu_action']) == strtolower($url)) {
+                    $menu_id = (int) $k;
+                }
+            }
+            if (empty($menu_id) || !isset($admin['menu_list'][$menu_id])) {
+                $url = 'javascript:void(0);';
+                $title = '未授权';
+                $mini = '';
+            } else {
+                $url = U($url, $vars);
+            }
+        } else {
+            $url = U($url, $vars);
+        }*/
+        //权限判断 暂时忽略，后面补充
+        $m = $c = $h = $w = '';
+        if (!empty($dialogType)) {
+            $m = ' dialog-type="' . $dialogType . '"  ';
+        }
+        $i = ' data-info="您确定要'.$title.'"';
+        if(!empty($info)){
+            $i = ' data-info="'.$info.'"';
+        }
+        if (!empty($class)) {
+            $c = ' class="layui-btn ' . $class . '" ';
+        }
+        if (!empty($width)) {
+            $w = ' w="' . $width . '" ';
+        }
+        if (!empty($width)) {
+            $h = ' h="' . $height . '" ';
+        }
+        if ($type == 'button'){
+            return '<button href-info="' . $url . '" ' . $m . $c . $w . $h . $i. ' >' . $title . '</button>';
+        } else {
+            return '<a href-info="' . $url . '" ' . $m . $c . $w . $h . $i. ' >' . $title . '</a>';
+        }
     }
 
 }

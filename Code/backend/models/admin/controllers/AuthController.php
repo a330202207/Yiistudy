@@ -3,6 +3,7 @@ namespace backend\models\admin\controllers;
 
 use backend\controllers\BaseController;
 use backend\model\menu;
+use backend\models\admin\model\RoleModel;
 use common\helpers\FuncHelper;
 
 /**
@@ -31,6 +32,13 @@ class AuthController extends BaseController
     public function actionIcon()
     {
         return $this->render('icon');
+    }
+
+    public function actionAuth()
+    {
+        $model = new RoleModel();
+        $data = $model->getAllRole();
+        return $this->render('auth', $data);
     }
 
 }

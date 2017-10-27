@@ -73,7 +73,7 @@ class LoginModel extends BaseActiveRecord
     }
 
     /**
-     * 记录登录
+     * 记录登录日志
      */
     public function loginLog(){
         $log = new LogModel();

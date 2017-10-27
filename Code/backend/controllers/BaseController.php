@@ -45,12 +45,13 @@ class BaseController extends Controller
             $res['code'] = isset($data['code']) ? $data['code'] : 1;
             $res['errCode'] = isset($data['errCode']) ? $data['errCode'] : '0000';
             $res['data'] = isset($data['data']) && is_string($data['data']) ? $data['data'] : '';
-            $res['msg'] = isset($data['msg']) ? $data['msg'] : 'unknown error';
+            $res['err'] = isset($data['err']) ? $data['msg'] : 'unknown error';
         } else {
             $res = $data;
         }
         return Json::encode($res);
     }
+
 
 /*    public function beforeAction($action)
     {

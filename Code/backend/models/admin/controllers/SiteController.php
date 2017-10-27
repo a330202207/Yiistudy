@@ -7,6 +7,7 @@ use backend\controllers\BaseController;
 use backend\models\admin\model\LoginModel;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\Session;
 
 /**
  * Site controller
@@ -93,6 +94,8 @@ class SiteController extends BaseController
     {
         $model = new LoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $session = \Yii::$app->session;
+            $session->set('sam_name' , 'myname');
             $model->loginLog();
             return $this->redirect(Url::toRoute('/admin/site/index'));
         } else {

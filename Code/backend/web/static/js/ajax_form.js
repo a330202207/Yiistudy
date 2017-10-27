@@ -14,8 +14,8 @@ layui.define(['form', 'table','layer', 'element'], function (exports) {
             $.post(url, data, function (res) {
                 if (res.code == 0) {
                     layer.msg(res.err, {icon: 1});
-                    table.reload('dateTable');
                     layer.close(index);
+                    location.reload();
                 } else {
                     layer.msg(res.err, {icon: 2});
 
