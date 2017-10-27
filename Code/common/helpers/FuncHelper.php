@@ -5,6 +5,7 @@ namespace common\helpers;
 use Yii;
 use yii\web\Session;
 use backend\models\admin\model\RoleMapsModel;
+use yii\helpers\Url;
 
 /**
  * 自定义辅助函数，处理其他杂项
@@ -353,7 +354,7 @@ class FuncHelper
      * @return string
      * @date
      */
-    public static function BA($url = '', $vars = '', $title = '', $dialogType = "", $class = "", $width = '', $height = '', $info='' ,$type = '') {
+    public static function BA($url = '', $title = '', $dialogType = "", $class = "", $width = '', $height = '', $info='' ,$type = '') {
         static $admin;
 /*        $user_id = Yii::$app->user->identity->getId();
         $session = Yii::$app->session;
@@ -398,6 +399,9 @@ class FuncHelper
         } else {
             $url = U($url, $vars);
         }*/
+
+        $url = Url::toRoute($url);
+
         //权限判断 暂时忽略，后面补充
         $m = $c = $h = $w = '';
         if (!empty($dialogType)) {

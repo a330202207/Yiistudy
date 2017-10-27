@@ -41,4 +41,23 @@ class AuthController extends BaseController
         return $this->render('auth', $data);
     }
 
+    public function actionAjaxsave()
+    {
+        $model = new RoleModel();
+        $model->authUserRole();
+        if (Yii::$app->request->isPost) {
+            $data = Yii::$app->request->post('role_id');
+
+            if ($model->load($data, '') && $model->validate()) {
+                if ($model->authUserRole($data)) {
+                    return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+                } else {
+                    return $this->resAjax($model->resLoginCode());
+                }
+            } else {
+                return $this->resAjax($model->resLoginCode());
+            }
+        }
+    }
+
 }

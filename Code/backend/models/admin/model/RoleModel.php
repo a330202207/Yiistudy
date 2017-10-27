@@ -22,4 +22,9 @@ class RoleModel extends Role
         return $res;
     }
 
+    public function authUserRole()
+    {
+
+    }
+
 }
