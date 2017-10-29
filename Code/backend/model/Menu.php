@@ -58,14 +58,15 @@ class Menu extends BaseActiveRecord
     //获取顶级菜单列表
     public function getAllMenu()
     {
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `blog_menu` WHERE parent='0' AND status=".self::STATUS_ACTIVE)->queryAll();
+//        $menu = Yii::$app->db->createCommand("SELECT * FROM `blog_menu` WHERE parent='0' AND status=".self::STATUS_ACTIVE)->queryAll();
+        $menu = $this->find()->where(['parent' => 0])->asArray()->all();
         return $menu;
     }
 
     //获取所有菜单列表
     public function getMenuList()
     {
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `blog_menu` WHERE status=".self::STATUS_ACTIVE." ORDER BY sort ASC ")->queryAll();
+        $menu = $this->find()->where(['status' => self::STATUS_ACTIVE])->asArray()->all();
         $menu = FuncHelper::list_to_tree($menu, 'menu_id', 'parent_id');
         return $menu;
     }

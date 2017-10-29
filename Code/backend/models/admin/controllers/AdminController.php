@@ -7,7 +7,7 @@ use backend\models\admin\model\AdminModel;
 use common\helpers\FuncHelper;
 
 /**
- * Site controller
+ * Admin controller
  */
 class AdminController extends BaseController
 {
