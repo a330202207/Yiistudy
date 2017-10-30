@@ -10,11 +10,12 @@ layui.use(['layer', 'ajax_form', 'data_validate'],function () {
         var title = $(this).text();
         var w = $(this).attr('w');
         var h = $(this).attr('h');
+        // console.log(href);return false;
         $.get(href, function (data) {
             var options = {};
             options.type = 1;
-            options.area = ['40%', '60%'];
-            // options.area = [w, h];
+            // options.area = ['40%', '60%'];
+            options.area = [w, h];
             options.title = title;
             options.content = data;
             options.shadeClose = true;

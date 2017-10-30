@@ -20,12 +20,25 @@ class AuthController extends BaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new RoleModel();
+        $data = $model->getAllRole();
+//        var_dump($data);die;
+
+//        $model = new Menu();
+//        $data = $model->getMenuList1();
+//        print_r($data);die;
+        return $this->render('index', [
+            'role' => $data
+        ]);
+    }
+
+    public function actionEdit()
+    {
+        return $this->render('edit');
     }
 
     public function actionSave()
     {
-
         return $this->render('save');
     }
 
@@ -36,9 +49,12 @@ class AuthController extends BaseController
 
     public function actionAuth()
     {
-        $model = new RoleModel();
-        $data = $model->getAllRole();
-        return $this->render('auth', $data);
+        $model = new Menu();
+        $data = $model->getMenuList1();
+//        print_r($data);die;
+        return $this->render('auth', [
+            'menu' => $data
+        ]);
     }
 
     public function actionAjaxsave()

@@ -13,13 +13,13 @@ class RoleModel extends Role
 
     public function getAllRole()
     {
-        $data = $this->find()->all();
+        $data = $this->find()->asArray()->all();
         $res = [
             'code' => 0,
             'msg' => '',
             'data' => $data ? $data : []
         ];
-        return $res;
+        return $data;
     }
 
     public function authUserRole()

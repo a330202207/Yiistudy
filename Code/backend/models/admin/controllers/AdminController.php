@@ -4,6 +4,7 @@ namespace backend\models\admin\controllers;
 use Yii;
 use backend\controllers\BaseController;
 use backend\models\admin\model\AdminModel;
+use backend\models\admin\model\RoleModel;
 use common\helpers\FuncHelper;
 
 /**
@@ -36,6 +37,13 @@ class AdminController extends BaseController
     public function actionEdit()
     {
         return $this->render('edit');
+    }
+
+    public function actionAuth()
+    {
+        $model = new RoleModel();
+        $data = $model->getAllRole();
+        return $this->render('auth');
     }
 
     public function actionAjaxsave()

@@ -311,7 +311,7 @@ class FuncHelper
                 } else {
                     if (isset($refer[$parentId])) {
                         $parent = &$refer[$parentId];
-                        $list[$key]['menu_name'] = $list[$key]['name'];
+                        $list[$key]['menu_name'] = $list[$key]['menu_name'];
                         $parent[$child][] = &$list[$key];
                     }
                 }
