@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 ?>
-<form class="layui-form layui-form-pane" action="<?=Url::toRoute(['admin/ajaxsave'])?>" method="post">
+<form class="layui-form layui-form-pane" action="<?=Url::toRoute(['admin/save'])?>" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label">用户名称</label>
         <div class="layui-input-inline">

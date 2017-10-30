@@ -46,7 +46,7 @@ class AdminController extends BaseController
         return $this->render('auth');
     }
 
-    public function actionAjaxsave()
+    public function actionSave()
     {
         $model = new AdminModel();
 
