@@ -18,7 +18,6 @@ layui.define(['form', 'table','layer', 'element'], function (exports) {
                     location.reload();
                 } else {
                     layer.msg(res.err, {icon: 2});
-
                 }
             },'json');
         }
