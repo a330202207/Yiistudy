@@ -50,6 +50,31 @@ layui.use(['table', 'form', 'layer', 'vip_table'], function () {
         }
     });
 
+    table.on('tool(test)', function(obj){
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event; //获得 lay-event 对应的值
+        var tr = obj.tr; //获得当前行 tr 的DOM对象
+        console.log(data);
+        console.log(layEvent);
+        console.log(tr);
+        return false;
+        if(layEvent === 'detail'){ //查看
+            //do somehing
+        } else if(layEvent === 'del'){ //删除
+           /* layer.confirm('真的删除行么', function(index){
+                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                layer.close(index);
+            });*/
+        } else if(layEvent === 'edit'){ //编辑
+
+            //同步更新缓存对应的值
+           /* obj.update({
+                username: '123'
+                ,title: 'xxx'
+            });*/
+        }
+    });
+
     // 获取选中行
     table.on('checkbox(dataCheck)', function (obj) {
         console.log(obj.checked); //当前是否选中状态

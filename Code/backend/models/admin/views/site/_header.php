@@ -15,7 +15,7 @@
     <!-- 顶部右侧添加选项卡监听 -->
     <ul class="layui-nav my-header-user-nav" lay-filter="side-top-right">
         <li class="layui-nav-item">
-            <a class="name" href="javascript:;"><img src="./static/image/code.png" alt="logo"> Admin </a>
+            <a class="name" href="javascript:;"><img src="/static/image/code.png" alt="logo"> Admin </a>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>个人信息</a></dd>
                 <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>登出</a></dd>

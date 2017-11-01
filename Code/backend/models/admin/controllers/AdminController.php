@@ -26,17 +26,27 @@ class AdminController extends BaseController
 
     public function actionAjaxgetindexlist()
     {
-        $searchModel = new AdminModel();
+        $model = new AdminModel();
 
         if (Yii::$app->request->isAjax) {
-            $data = $searchModel->getAdminAll(Yii::$app->request->queryParams);
+            $data = $model->getAdminAll(Yii::$app->request->queryParams);
             return $this->resAjax($data);
         }
     }
 
     public function actionEdit()
     {
-        return $this->render('edit');
+//        var_dump(Yii::$app->request->get());die;
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $model = new AdminModel();
+            $data = $model->getAdminOne($id);
+//            var_dump($model->getAdminOne($id));die;
+            return $this->render('edit',[
+                'admin' => $data
+            ]);
+        }
+
     }
 
     public function actionAuth()

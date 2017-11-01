@@ -54,6 +54,18 @@ class AdminModel extends Admin
         return Model::scenarios();
     }
 
+    public function getAdminOne($id)
+    {
+        $data = $this->findOne($id);
+        /*$res = [
+            'code' => 0,
+            'msg' => '',
+            'data' => $data ? $data : []
+        ];*/
+        return $data;
+
+    }
+
     public function getAdminAll($params)
     {
         $data = $this->find()
