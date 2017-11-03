@@ -76,17 +76,17 @@ class Admin extends BaseActiveRecord implements IdentityInterface
         return [
             'id' => 'Id',
             'role_id' => 'Role Id',
-            'username' => 'Username',
-            'password' => 'Password',
+            'username' => '用户名',
+            'password' => '密码',
             'salt' => 'Salt',
-            'email' => 'Email',
-            'mobile' => 'Mobile',
+            'email' => '邮箱',
+            'mobile' => '电话',
             'create_time' => 'Create Time',
             'update_time' => 'Update Time',
             'create_ip' => 'Create Ip',
             'last_login_time' => 'Last Login Time',
             'last_login_ip' => 'Last Login Ip',
-            'status' => 'Status',
+            'status' => '用户状态',
             'is_del' => 'Is Del',
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\model\Menu;
 use Yii;
 use yii\web\Controller;
 use yii\helpers\Json;
@@ -20,6 +21,7 @@ class BaseController extends Controller
 
     public function init()
     {
+        $this->_model = new Menu();
         parent::init();
     }
 

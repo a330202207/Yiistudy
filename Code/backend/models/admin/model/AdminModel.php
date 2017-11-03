@@ -32,13 +32,9 @@ class AdminModel extends Admin
     public function rules()
     {
         return [
-            ['username', 'required', 'message' => '请输入用户名！'],
-            ['password', 'required', 'message' => '请输入密码！'],
-            ['email', 'required', 'message' => '请输入邮箱！'],
+            [['username', 'password', 'email', 'mobile'], 'required', 'message' => '请输入{attribute}！'],
             ['email', 'email', 'message' => '请输入正确邮箱！'],
-            ['mobile', 'required', 'message' => '请输入电话！'],
             ['username', 'unique', 'message' => '用户名已存在！'],
-            ['email', 'unique', 'message' => 'email已存在！'],
             ['username', 'string', 'length' => [4, 24], 'tooShort'=> '用户名不能小于4个字符', 'tooLong' => '用户名不能大于24个字符'],
             ['password','string', 'min' => 6, 'tooShort'=> '密码不能小于6个字符'],
         ];
@@ -54,19 +50,18 @@ class AdminModel extends Admin
         return Model::scenarios();
     }
 
-    public function getAdminOne($id)
+    public function findAdminOne($id)
     {
-        $data = $this->findOne($id);
         /*$res = [
             'code' => 0,
             'msg' => '',
             'data' => $data ? $data : []
         ];*/
-        return $data;
+         return static::findOne(['id' => $id]);
 
     }
 
-    public function getAdminAll($params)
+    public function findAdminAll($params)
     {
         $data = $this->find()
             ->select('test_admin.*,test_role.role_name')
@@ -86,6 +81,21 @@ class AdminModel extends Admin
         return $res;
     }
 
+    public function insertAdmin($data)
+    {
+        $this->generateAuthKey();
+        $this->setPassword($data['password']);
+        $this->setAttributes($data);
+        return $this->insert();
+    }
+
+    public function updateAdmin($data)
+    {
+        $obj = self::findOne($data['id']);
+        $obj->setAttributes($data);
+        return $obj->save();
+    }
+
     public function _formatData($data)
     {
         foreach ($data as $key => $value) {
@@ -97,7 +107,7 @@ class AdminModel extends Admin
                 'create_time' => date('Y-m-d H:i', $value['create_time']),
                 'last_login_time' => date('Y-m-d H:i', $value['last_login_time']),
                 'last_login_ip' => long2ip($value['last_login_ip']),
-                'status' => $value['status'] == 10 ? '正常' : '禁用',
+                'status' => $value['status'],
             ];
         }
         return $data;

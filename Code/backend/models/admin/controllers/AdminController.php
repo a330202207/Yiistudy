@@ -13,6 +13,14 @@ use common\helpers\FuncHelper;
 class AdminController extends BaseController
 {
 
+    private $_model;
+
+    public function init()
+    {
+        parent::init();
+        $this->_model = new AdminModel();
+    }
+
 
     /**
      * 管理员首页
@@ -24,64 +32,102 @@ class AdminController extends BaseController
         return $this->render('index');
     }
 
+    /**
+     * 管理员列表
+     *
+     * @return string
+     */
     public function actionAjaxgetindexlist()
     {
-        $model = new AdminModel();
 
         if (Yii::$app->request->isAjax) {
-            $data = $model->getAdminAll(Yii::$app->request->queryParams);
+            $data = $this->_model->findAdminAll(Yii::$app->request->queryParams);
             return $this->resAjax($data);
         }
     }
 
+    /**
+     * 管理员编辑
+     *
+     * @return string
+     */
     public function actionEdit()
     {
-//        var_dump(Yii::$app->request->get());die;
         if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->get('id');
-            $model = new AdminModel();
-            $data = $model->getAdminOne($id);
-//            var_dump($model->getAdminOne($id));die;
-            return $this->render('edit',[
+            $data = $this->_model->findAdminOne($id);
+            return $this->render('edit', [
                 'admin' => $data
             ]);
         }
 
     }
 
+    public function actionDelete()
+    {
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $res = $this->_model->deleteOne(['id' => $id]);
+            if ($res) {
+                return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+            } else {
+                return $this->resAjax($this->_model->resLoginCode());
+            }
+        }
+
+    }
+
+    /**
+     * 管理员授权
+     *
+     * @return string
+     */
     public function actionAuth()
     {
         $model = new RoleModel();
         $data = $model->getAllRole();
-        return $this->render('auth');
+        return $this->render('auth', [
+            'role' => $data
+        ]);
     }
 
+    /**
+     *
+     *
+     * @return string
+     */
     public function actionSave()
     {
-        $model = new AdminModel();
-
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
-
-            if ($model->load($data, '') && $model->validate()) {
-
-                $data['reg_time'] = time();
-                $data['reg_ip'] = ip2long(Yii::$app->request->getUserIP());
+            $id = Yii::$app->request->post('id');
+            $this->checkData($data);
+            if (empty($id)) {
+                $data['create_ip'] = ip2long(Yii::$app->request->getUserIP());
                 $data['last_login_time'] = 0;
                 $data['last_login_ip'] = ip2long('127.0.0.1');
-                $data['update_time'] = time();
-
-                $model->generateAuthKey();
-                $model->setPassword($data['password']);
-
-                if ($model->save()) {
-                    return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
-                } else {
-                    return $this->resAjax($model->resLoginCode());
-                }
+                $res = $this->_model->insertAdmin($data);
             } else {
-                return $this->resAjax($model->resLoginCode());
+                $res = $this->_model->updateAdmin($data);
             }
+
+            if ($res) {
+                return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+            } else {
+                return $this->resAjax($this->_model->resLoginCode());
+            }
+        }
+    }
+
+    /**
+     *
+     * 检查数据
+     * @return string
+     */
+    public function checkData($data)
+    {
+        if (!$this->_model->load($data, '') && !$this->_model->validate()) {
+            return $this->resAjax($this->_model->resLoginCode());
         }
     }
 

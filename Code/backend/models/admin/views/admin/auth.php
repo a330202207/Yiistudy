@@ -10,7 +10,7 @@ $this->registerJsFile('@web/static/admin/auth.js', ['depends' => ['backend\asset
         </div>
     </div>
     <div class="layui-form-item">
-        <?php foreach($data as $val):?>
+        <?php foreach($role as $val):?>
             <div class="layui-input-block">
                 <input type="radio" name="role_id" value="<?=$val['id']?>" title="<?=$val['role_name']?>" checked="">
             </div>
