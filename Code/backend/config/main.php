@@ -5,9 +5,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'defaultRoute' => 'admin/index',
     'modules' => [
         'admin' => [
             'class' => 'backend\models\admin\Admin',
+            'defaultRoute' => 'site',
         ],
     ],
     'components' => [
@@ -33,16 +35,11 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],*/
+        // 'urlManager' => [
+        //     'enablePrettyUrl' => true,
+        //     'showScriptName' => false,
+        //     'rules' => [],
+        // ],
         /* 数据库RBAC权限控制 */
         /*'authManager' => [
             'class' => 'common\components\rbac\DbManager',
