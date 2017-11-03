@@ -52,13 +52,7 @@ class AdminModel extends Admin
 
     public function findAdminOne($id)
     {
-        /*$res = [
-            'code' => 0,
-            'msg' => '',
-            'data' => $data ? $data : []
-        ];*/
          return static::findOne(['id' => $id]);
-
     }
 
     public function findAdminAll($params)
@@ -90,6 +84,13 @@ class AdminModel extends Admin
     }
 
     public function updateAdmin($data)
+    {
+        $obj = self::findOne($data['id']);
+        $obj->setAttributes($data);
+        return $obj->save();
+    }
+
+    public function authAdminRole($data)
     {
         $obj = self::findOne($data['id']);
         $obj->setAttributes($data);

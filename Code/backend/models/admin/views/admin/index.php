@@ -30,7 +30,7 @@ $this->registerJsFile('@web/static/admin/admin.js', ['depends' => ['backend\asse
 
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">
-    <a class="layui-btn layui-btn-mini" href-info="<?=Url::toRoute(['admin/auth'])?>" lay-event="auth">授权</a>
+    <a class="layui-btn layui-btn-mini" href-info="<?=Url::toRoute(['admin/edit-auth'])?>" lay-event="auth">授权</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" href-info="<?=Url::toRoute(['admin/edit'])?>" w="60%" h="60%" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" href-info="<?=Url::toRoute(['admin/delete'])?>" lay-event="delete">删除</a>
 </script>

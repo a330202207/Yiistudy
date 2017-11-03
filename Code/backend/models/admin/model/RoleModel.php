@@ -10,16 +10,24 @@ use backend\model\Role;
  */
 class RoleModel extends Role
 {
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            ['role_name', 'required', 'message' => '请选择{attribute}！'],
+        ];
+    }
+
+    public function findRoleOne($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
 
     public function getAllRole()
     {
-        $data = $this->find()->asArray()->all();
-        $res = [
-            'code' => 0,
-            'msg' => '',
-            'data' => $data ? $data : []
-        ];
-        return $data;
+        return $this->find()->asArray()->all();
     }
 
     public function authUserRole()

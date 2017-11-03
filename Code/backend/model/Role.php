@@ -50,7 +50,7 @@ class Role extends BaseActiveRecord
     {
         return [
             'role_id' => 'Role Id',
-            'role_name' => 'Role Name',
+            'role_name' => '角色名称',
         ];
     }
 

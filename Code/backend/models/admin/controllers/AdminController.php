@@ -82,13 +82,31 @@ class AdminController extends BaseController
      *
      * @return string
      */
-    public function actionAuth()
+    public function actionEditAuth()
     {
         $model = new RoleModel();
+        $admin_id = Yii::$app->request->get('id');
+        $admin = $this->_model->findAdminOne($admin_id);
         $data = $model->getAllRole();
         return $this->render('auth', [
-            'role' => $data
+            'admin_id' => $admin_id,
+            'roles' => $data,
+            'role_id' => $admin['role_id'],
         ]);
+    }
+
+    public function actionAuthAdminRole()
+    {
+        if (Yii::$app->request->isPost) {
+            $data = Yii::$app->request->post();
+            $this->checkData($data);
+            $res = $this->_model->authAdminRole($data);
+            if ($res) {
+                return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+            } else {
+                return $this->resAjax($this->_model->resLoginCode());
+            }
+        }
     }
 
     /**
