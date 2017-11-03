@@ -5,7 +5,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'defaultRoute' => 'admin/index',
+    'defaultRoute' => 'admin/site/login',
     'modules' => [
         'admin' => [
             'class' => 'backend\models\admin\Admin',
