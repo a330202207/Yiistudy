@@ -55,6 +55,14 @@ class AdminModel extends Admin
          return static::findOne(['id' => $id]);
     }
 
+    /**
+     * 根据ID获取账号信息
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
+
     public function findAdminAll($params)
     {
         $data = $this->find()

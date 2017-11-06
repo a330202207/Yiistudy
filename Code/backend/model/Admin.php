@@ -58,7 +58,7 @@ class Admin extends BaseActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'password', 'salt', 'email'], 'required'],
-            [['create_time', 'create_ip', 'last_login_time', 'last_login_ip', 'update_time', 'status', 'is_del'], 'integer'],
+            [['create_time', 'create_ip', 'last_login_time', 'last_login_ip', 'update_time', 'role_id','status', 'is_del'], 'integer'],
             [['username'], 'string', 'max' => 16],
             [['password'], 'string', 'max' => 60],
             [['salt', 'email'], 'string', 'max' => 32],

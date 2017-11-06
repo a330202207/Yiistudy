@@ -99,7 +99,6 @@ class AdminController extends BaseController
     {
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
-            $this->checkData($data);
             $res = $this->_model->authAdminRole($data);
             if ($res) {
                 return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
@@ -119,18 +118,22 @@ class AdminController extends BaseController
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
             $id = Yii::$app->request->post('id');
-            $this->checkData($data);
-            if (empty($id)) {
-                $data['create_ip'] = ip2long(Yii::$app->request->getUserIP());
-                $data['last_login_time'] = 0;
-                $data['last_login_ip'] = ip2long('127.0.0.1');
-                $res = $this->_model->insertAdmin($data);
-            } else {
-                $res = $this->_model->updateAdmin($data);
-            }
 
-            if ($res) {
-                return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+            if ($this->_model->load($data, '') && $this->_model->validate()) {
+                if (empty($id)) {
+                    $data['create_ip'] = ip2long(Yii::$app->request->getUserIP());
+                    $data['last_login_time'] = 0;
+                    $data['last_login_ip'] = ip2long('127.0.0.1');
+                    $res = $this->_model->insertAdmin($data);
+                } else {
+                    $res = $this->_model->updateAdmin($data);
+                }
+
+                if ($res) {
+                    return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+                } else {
+                    return $this->resAjax($this->_model->resLoginCode());
+                }
             } else {
                 return $this->resAjax($this->_model->resLoginCode());
             }

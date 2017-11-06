@@ -1,46 +1,26 @@
 <?php
 use yii\helpers\Url;
 ?>
-<div class="layui-form layui-border-box layui-table-view">
-    <div class="layui-table-header">
-        <table class="layui-table">
-            <thead>
-            <tr>
-                <th>
-                    <div class="layui-table-cell">
-                        <span>ID</span>
-                    </div>
-                </th>
-                <th >
-                    <div class="layui-table-cell">
-                        <span>角色名称</span>
-                    </div>
-                </th>
-                <th>
-                    <div class="layui-table-cell">
-                        <span>操作</span>
-                    </div>
-                </th>
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="layui-table-body">
-        <table class="layui-table">
-            <tbody>
-            <?php foreach ($role as $val):?>
-                <tr>
-                    <td><div class="layui-table-cell"><?=$val['id']?></div></td>
-                    <td><div class="layui-table-cell"><?=$val['role_name']?></div></td>
-                    <td>
-                        <div class="layui-table-cell">
-                            <a href-info="<?=Url::toRoute(['auth/auth'])?>" dialog-type="load" class="layui-btn layui-btn-mini" w="700px">授权</a>
-                            <a href-info="<?=Url::toRoute(['auth/edit'])?>" dialog-type="load" w="500px" class="layui-btn layui-btn-mini layui-btn-normal">更新</a>
-                            <a href-info="<?=Url::toRoute(['auth/delete'])?>" class="layui-btn layui-btn-mini layui-btn-danger">删除</a>
-                        </div>
-                    </td>
-                </tr>
-            <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>
+
+<table class="layui-table" lay-data="{height:315, url:'/admin/admin/auth', page:false, id:'customer', method:'get'}" lay-filter="customer">
+    <thead>
+    <tr>
+        <th lay-data="{field:'id', width:80}">ID</th>
+        <th lay-data="{field:'role_name', width:80}">角色名称</th>
+        <th lay-data="{field:'right', width:160, align:'center', toolbar:'#barOption'}">操作</th>
+    </tr>
+    </thead>
+</table>
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+</script>
+
+<!-- 表格操作按钮集 -->
+<script type="text/html" id="barOption">
+    <a class="layui-btn layui-btn-mini" href-info="<?=Url::toRoute(['auth/edit-auth'])?>" lay-event="auth">授权</a>
+    <a class="layui-btn layui-btn-mini layui-btn-normal" href-info="<?=Url::toRoute(['auth/edit'])?>" w="60%" h="60%" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" href-info="<?=Url::toRoute(['auth/delete'])?>" lay-event="delete">删除</a>
+</script>
