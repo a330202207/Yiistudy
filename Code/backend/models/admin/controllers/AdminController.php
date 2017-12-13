@@ -63,11 +63,16 @@ class AdminController extends BaseController
 
     }
 
+    /**
+     * 管理员删除
+     *
+     * @return string
+     */
     public function actionDelete()
     {
         if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->get('id');
-            $res = $this->_model->deleteOne(['id' => $id]);
+            $res = $this->_model->deleteOne($id);
             if ($res) {
                 return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
             } else {
@@ -95,6 +100,11 @@ class AdminController extends BaseController
         ]);
     }
 
+    /**
+     * 管理员授权操作
+     *
+     * @return string
+     */
     public function actionAuthAdminRole()
     {
         if (Yii::$app->request->isPost) {
@@ -110,7 +120,7 @@ class AdminController extends BaseController
 
     /**
      *
-     *
+     * 保存管理员
      * @return string
      */
     public function actionSave()
@@ -151,9 +161,6 @@ class AdminController extends BaseController
             return $this->resAjax($this->_model->resLoginCode());
         }
     }
-
-
-
 
 
 }

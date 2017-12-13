@@ -34,7 +34,7 @@ class AdminModel extends Admin
         return [
             [['username', 'password', 'email', 'mobile'], 'required', 'message' => '请输入{attribute}！'],
             ['email', 'email', 'message' => '请输入正确邮箱！'],
-            ['username', 'unique', 'message' => '用户名已存在！'],
+            ['status', 'required', 'message' => '用户状态不能为空！'],
             ['username', 'string', 'length' => [4, 24], 'tooShort'=> '用户名不能小于4个字符', 'tooLong' => '用户名不能大于24个字符'],
             ['password','string', 'min' => 6, 'tooShort'=> '密码不能小于6个字符'],
         ];
@@ -98,10 +98,17 @@ class AdminModel extends Admin
         return $obj->save();
     }
 
+    public function deleteOne($id)
+    {
+        $obj = self::findOne($id);
+        $obj->is_del = 1;
+        return $obj->save();
+    }
+
     public function authAdminRole($data)
     {
-        $obj = self::findOne($data['id']);
-        $obj->setAttributes($data);
+        $obj = $this->findOne($data['id']);
+        $obj->role_id = $data['role_id'];
         return $obj->save();
     }
 
@@ -114,7 +121,7 @@ class AdminModel extends Admin
                 'mobile' => $value['mobile'],
                 'role_name' => $value['role_name'],
                 'create_time' => date('Y-m-d H:i', $value['create_time']),
-                'last_login_time' => date('Y-m-d H:i', $value['last_login_time']),
+                'last_login_time' => $value['last_login_time'] == 0 ? 0 : date('Y-m-d H:i', $value['last_login_time']),
                 'last_login_ip' => long2ip($value['last_login_ip']),
                 'status' => $value['status'],
             ];

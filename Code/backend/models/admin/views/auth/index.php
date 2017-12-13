@@ -1,22 +1,21 @@
 <?php
 use yii\helpers\Url;
+//$this->registerJsFile('@web/static/admin/auth.js', ['depends' => ['backend\assets\AppAsset']]);
 ?>
-
-<table class="layui-table" lay-data="{height:315, url:'/admin/admin/auth', page:false, id:'customer', method:'get'}" lay-filter="customer">
+<div class="my-btn-box">
+    <span class="fl">
+        <a class="layui-btn btn-add btn-default" dialog-type="load" href-info="<?=Url::toRoute(['auth/edit'])?>" w="60%" h="60%" lay-event="edit">添加角色</a>
+    </span>
+</div>
+<table class="layui-table" lay-data="{height:315, url:'/admin/auth/auth', page:false, id:'test', method:'get'}" lay-filter="customer">
     <thead>
-    <tr>
-        <th lay-data="{field:'id', width:80}">ID</th>
-        <th lay-data="{field:'role_name', width:80}">角色名称</th>
-        <th lay-data="{field:'right', width:160, align:'center', toolbar:'#barOption'}">操作</th>
-    </tr>
+        <tr>
+            <th lay-data="{field:'id', width:80}">ID</th>
+            <th lay-data="{field:'role_name', width:180}">角色名称</th>
+            <th lay-data="{field:'right', width:160, align:'center', toolbar:'#barOption'}">操作</th>
+        </tr>
     </thead>
 </table>
-
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
-    });
-</script>
 
 <!-- 表格操作按钮集 -->
 <script type="text/html" id="barOption">

@@ -11,7 +11,7 @@ use yii\helpers\Url;
                         <span>ID</span>
                     </div>
                 </th>
-                <th >
+                <th>
                     <div class="layui-table-cell">
                         <span>角色名称</span>
                     </div>
@@ -35,7 +35,7 @@ use yii\helpers\Url;
                     <td>
                         <div class="layui-table-cell">
                             <a href-info="<?=Url::toRoute(['auth/auth'])?>" dialog-type="load" class="layui-btn layui-btn-mini" w="700px">授权</a>
-                            <a href-info="<?=Url::toRoute(['auth/edit'])?>" dialog-type="load" w="500px" class="layui-btn layui-btn-mini layui-btn-normal">更新</a>
+                            <a href-info="<?=Url::toRoute(['auth/edit'])?>" dialog-type="load" w="500px" class="layui-btn layui-btn-mini layui-btn-normal">编辑</a>
                             <a href-info="<?=Url::toRoute(['auth/delete'])?>" class="layui-btn layui-btn-mini layui-btn-danger">删除</a>
                         </div>
                     </td>

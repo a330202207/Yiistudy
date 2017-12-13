@@ -75,7 +75,8 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
              obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
              layer.close(index);
              });*/
-            layer.confirm('确定要删除该用户【' + data.username + '】？', { icon: 3 }, function (index) {
+            // layer.confirm('确定要删除该用户【' + data.username + '】？', { icon: 3 }, function (index) {
+            layer.confirm('确定要删除该条数据？', { icon: 3 }, function (index) {
                 ajax_form.AjaxFrom(href,'get',{ id: id},index,'json');
             });
         } else if(layEvent === 'auth'){ //授权
@@ -133,7 +134,7 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
         var w = $(that).attr('w');
         var h = $(that).attr('h');
 
-        ajax_form.AjaxFrom(url,'get',{}, '');
+        // ajax_form.AjaxFrom(url,'get',{}, '');
 
         $.get(href, function (data) {
             var options = {};

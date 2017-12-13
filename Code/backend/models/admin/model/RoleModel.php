@@ -35,4 +35,22 @@ class RoleModel extends Role
 
     }
 
+    public function insertRole($data)
+    {
+        $this->setAttributes($data);
+        return $this->insert();
+    }
+
+    public function updateRole($data)
+    {
+        $obj = self::findOne($data['id']);
+        $obj->setAttributes($data);
+        return $obj->save();
+    }
+
+    public function deleteOne($id)
+    {
+        return $this->deleteAll(['id' => $id]);
+    }
+
 }
