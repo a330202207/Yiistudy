@@ -1,8 +1,7 @@
 <?php
 use yii\helpers\Url;
 use common\helpers\FuncHelper;
-\backend\assets\AppAsset::register($this);
-$this->registerJsFile('@web/static/admin/admin.js', ['depends' => ['backend\assets\AppAsset']]);
+//\backend\assets\AppAsset::register($this);
 ?>
 <div class="my-btn-box">
     <span class="fl">
@@ -14,10 +13,22 @@ $this->registerJsFile('@web/static/admin/admin.js', ['depends' => ['backend\asse
     </span>
 </div>
 
-<!-- 表格 -->
-<div>
-    <table id="customer" lay-filter="customer"></table>
-</div>
+<table class="layui-table" lay-data="{height:315, url:'/admin/admin/ajaxgetindexlist', page:false, limit:'10', id:'test', method:'get'}" lay-filter="customer">
+    <thead>
+        <tr>
+            <th lay-data="{field:'id', width:80}">ID</th>
+            <th lay-data="{field:'username', width:180}">用户名</th>
+            <th lay-data="{field:'mobile', width:150}">手机</th>
+            <th lay-data="{field:'role_name', width:150}">角色</th>
+            <th lay-data="{field:'mobile', width:120}">手机</th>
+            <th lay-data="{field:'last_login_time', width:150}">最后登录时间</th>
+            <th lay-data="{field:'last_login_ip', width:120}">最后登录IP</th>
+            <th lay-data="{field:'create_time', width:150}">创建时间</th>
+            <th lay-data="{field:'status', width:70, templet:'#statusTpl'}">状态</th>
+            <th lay-data="{field:'right', width:160, align:'center', toolbar:'#barOption'}">操作</th>
+        </tr>
+    </thead>
+</table>
 
 <script type="text/html" id="statusTpl">
     {{# var status = d.status }}

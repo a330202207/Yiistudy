@@ -14,8 +14,6 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
         ajax_form = layui.ajax_form,
         $ = layui.jquery;
 
-    var type = $("#customer").find(".barOption").attr('dialog-type');
-
     // 表格渲染
     var tableIns = table.render({
         id: 'customer',
@@ -139,7 +137,7 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
 
         if (type === 'delete') { //编辑
             layer.confirm('确定要删除该条数据？', { icon: 3 }, function (index) {
-                ajax_form.AjaxFrom(href,'get',index,'json');
+                ajax_form.AjaxFrom(href,'get','',index,'json');
             });
         } else if(type === 'edit') {
 
