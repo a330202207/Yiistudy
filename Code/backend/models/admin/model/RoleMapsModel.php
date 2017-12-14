@@ -44,13 +44,27 @@ class RoleMapsModel extends BaseActiveRecord
 
     public function getMenuIdsByRoleId($role_id)
     {
-        $role_id = (int) $role_id;
-        $datas = $this->find()->where(['role_id' => $role_id])->all();
+        $roleId = (int) $role_id;
+        $datas = $this->find()->where(['role_id' => $roleId])->all();
         $res = [];
         foreach($datas as $val){
             $res[$val['menu_id']] = $val['menu_id'];
         }
         return $res;
+    }
+
+    public function saveMenuIdsByRoleId($data)
+    {
+        $roleId = $data['role_id'];
+        $menusIds = $data['menus'];
+        $rows = [];
+        foreach ($menusIds as $val) {
+            $rows[] = [
+                'role_id' => $roleId,
+                'menu_id' => $val
+            ];
+        }
+        return Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['role_id', 'menu_id'], $rows)->execute();
     }
 
 

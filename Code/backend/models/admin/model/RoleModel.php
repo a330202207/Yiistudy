@@ -35,7 +35,7 @@ class RoleModel extends Role
 
     }
 
-    public function insertRole($data)
+    public function addRole($data)
     {
         $this->setAttributes($data);
         return $this->insert();

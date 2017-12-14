@@ -14,6 +14,8 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
         ajax_form = layui.ajax_form,
         $ = layui.jquery;
 
+    var type = $("#customer").find(".barOption").attr('dialog-type');
+
     // 表格渲染
     var tableIns = table.render({
         id: 'customer',
@@ -127,35 +129,46 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
         }
     });
 
-    $(document).on("click", "a[dialog-type='load']", function () {
+    $(document).on("click", "a[lay-event]", function () {
         var that = this;
+        var type = $(that).attr('lay-event');
         var href = $(that).attr('href-info');
         var title = $(that).text();
         var w = $(that).attr('w');
         var h = $(that).attr('h');
 
-        // ajax_form.AjaxFrom(url,'get',{}, '');
+        if (type === 'delete') { //编辑
+            layer.confirm('确定要删除该条数据？', { icon: 3 }, function (index) {
+                ajax_form.AjaxFrom(href,'get',index,'json');
+            });
+        } else if(type === 'edit') {
 
-        $.get(href, function (data) {
-            var options = {};
-            options.type = 1;
-            options.area = [w, h];
-            options.shade = 0.4;
-            options.title = title;
-            options.content = data;
-            options.shadeClose = true;
-            options.maxmin = true;
-            options.offset = ['100px'];
-            options.btn = ['保存', '取消'];
-            options.yes = function (index, layero) {
-                var url = layero.find('form').attr("action");
-                var form_data = layero.find('form').serializeArray();
-                ajax_form.AjaxFrom(url,'post',form_data,index,'');
-            };
-            options.btn2 = function (index, layero) {
-                parent.layer.close();
-            };
-            parent.layer.open(options);
-        }, 'html');
+
+            // ajax_form.AjaxFrom(url,'get',{}, '');
+
+            $.get(href, function (data) {
+                var options = {};
+                options.type = 1;
+                options.area = [w, h];
+                options.shade = 0.4;
+                options.title = title;
+                options.content = data;
+                options.shadeClose = true;
+                options.maxmin = true;
+                options.offset = ['100px'];
+                options.btn = ['保存', '取消'];
+                options.yes = function (index, layero) {
+                    var url = layero.find('form').attr("action");
+                    var form_data = layero.find('form').serializeArray();
+                    ajax_form.AjaxFrom(url,'post',form_data,index,'');
+                };
+                options.btn2 = function (index, layero) {
+                    parent.layer.close();
+                };
+                parent.layer.open(options);
+            }, 'html');
+        }
+
+
     });
 });

@@ -55,12 +55,12 @@ class AdminController extends BaseController
     {
         if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->get('id');
+
             $data = $this->_model->findAdminOne($id);
             return $this->render('edit', [
                 'admin' => $data
             ]);
         }
-
     }
 
     /**
@@ -134,7 +134,7 @@ class AdminController extends BaseController
                     $data['create_ip'] = ip2long(Yii::$app->request->getUserIP());
                     $data['last_login_time'] = 0;
                     $data['last_login_ip'] = ip2long('127.0.0.1');
-                    $res = $this->_model->insertAdmin($data);
+                    $res = $this->_model->addAdmin($data);
                 } else {
                     $res = $this->_model->updateAdmin($data);
                 }

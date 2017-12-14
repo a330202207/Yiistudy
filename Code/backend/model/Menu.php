@@ -32,7 +32,7 @@ class Menu extends BaseActiveRecord
     public function rules()
     {
         return [
-            [['menu_name', 'action', 'icon'], 'required'],
+            [['menu_name'], 'required'],
             [['parent_id', 'sort', 'is_show', 'status'], 'integer'],
             [['menu_name', 'icon', 'action'], 'string', 'max' => 50],
         ];
@@ -97,7 +97,7 @@ class Menu extends BaseActiveRecord
         }
         $RolesList = substr($RolesList, 0, -1);
 
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `blog_menu` WHERE route IN ($RolesList)  ORDER BY `order` ASC")->queryAll();
+        $menu = Yii::$app->db->createCommand("SELECT * FROM `test_menu` WHERE route IN ($RolesList)  ORDER BY `order` ASC")->queryAll();
         $menu = self::list_to_tree2($menu, 'id', 'parent');
         return $menu;
     }
@@ -105,7 +105,7 @@ class Menu extends BaseActiveRecord
     //通过id找到router
     public function getRouteById($id)
     {
-        $router = Yii::$app->db->createCommand("SELECT * FROM `blog_menu` WHERE id='$id'")->queryOne();
+        $router = Yii::$app->db->createCommand("SELECT * FROM `test_menu` WHERE id='$id'")->queryOne();
         return $router['route'];
     }
 

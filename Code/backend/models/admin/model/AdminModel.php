@@ -83,7 +83,7 @@ class AdminModel extends Admin
         return $res;
     }
 
-    public function insertAdmin($data)
+    public function addAdmin($data)
     {
         $this->generateAuthKey();
         $this->setPassword($data['password']);

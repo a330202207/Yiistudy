@@ -15,18 +15,15 @@ layui.define(['form', 'table','layer', 'element'], function (exports) {
                 type: type ? type : 'post',
                 data: data ? data : {},
                 dataType: dataType ? dataType : 'json',
-                success: function (result)
-                {
+                success: function (result) {
+                    layer.close(index);
                     if (result.code == 0) {
                         parent.layer.msg(result.err, { icon: 1, shade: 0.4,time: 1000 });
-                        parent.layer.close(index);
                         location.reload();
                     } else {
                         parent.layer.msg(result.err, { icon: 2, shade: 0.4, time: 1000 });
                     }
-                },
-                error: function (error)
-                {
+                }, error: function (error) {
                     parent.layer.alert(error.responseText, { icon: 2, title: '提示' });
                 }
             });

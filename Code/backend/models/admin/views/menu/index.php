@@ -10,9 +10,9 @@ $this->title = '菜单管理';
 ?>
 <div class="layui-tab-item layui-show">
     <div class="my-btn-box">
-         <span class="fr">
+         <span class="fl">
     <!--                        <a class="layui-btn btn-add btn-default" id="btn-add" href="--><?//=Url::toRoute(['menu/add'])?><!--">添加模块/主菜单</a>-->
-            <a class="layui-btn btn-add btn-default" dialog-type="load" href-info="<?=Url::toRoute(['menu/save'])?>">添加模块/主菜单</a>
+            <a class="layui-btn btn-add btn-default" lay-event="edit" href-info="<?=Url::toRoute(['menu/edit'])?>">添加模块/主菜单</a>
         </span>
     </div>
     <table class="layui-table">
@@ -39,9 +39,9 @@ $this->title = '菜单管理';
                     </div>
                 </td>
                 <td>
-                    <a class="layui-btn layui-btn-mini" href="<?=Url::toRoute(['menu/add', 'menu_id' => $vo['menu_id']])?>">添加子菜单</a>
-                    <a class="layui-btn layui-btn-mini layui-btn-normal" href="<?=Url::toRoute(['menu/edit', 'menu_id' => $vo['menu_id']])?>">编辑</a>
-                    <a class="layui-btn layui-btn-mini layui-btn-danger" href="<?=Url::toRoute(['menu/delete', 'menu_id' => $vo['menu_id']])?>">删除</a>
+                    <a class="layui-btn layui-btn-mini" lay-event="edit" href-info="<?=Url::toRoute(['menu/edit', 'parent_id' => $vo['menu_id']])?>">添加子菜单</a>
+                    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit" href-info="<?=Url::toRoute(['menu/edit', 'menu_id' => $vo['menu_id']])?>">编辑</a>
+                    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="delete" href-info="<?=Url::toRoute(['menu/delete', 'menu_id' => $vo['menu_id']])?>">删除</a>
                 </td>
             </tr>
             <?php if(!empty($vo['_child'])):?>
@@ -54,9 +54,9 @@ $this->title = '菜单管理';
                             </div>
                         </td>
                         <td>
-                            <a class="layui-btn layui-btn-mini" href="<?=Url::toRoute(['menu/add', 'menu_id' => $v['menu_id']])?>">添加子菜单</a>
-                            <a class="layui-btn layui-btn-mini layui-btn-normal" href="<?=Url::toRoute(['menu/edit','id'=>$v['menu_id']])?>">编辑</a>
-                            <a class="layui-btn layui-btn-mini layui-btn-danger" href="<?=Url::toRoute(['menu/delete','id'=>$v['menu_id']])?>">删除</a>
+                            <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="edit" href-info="<?=Url::toRoute(['menu/add-action', 'parent_id' => $v['menu_id']])?>">添加子节点</a>
+                            <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit" href-info="<?=Url::toRoute(['menu/edit','menu_id'=>$v['menu_id'], 'parent_id' => $vo['menu_id']])?>">编辑</a>
+                            <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="delete" href-info="<?=Url::toRoute(['menu/delete','menu_id'=>$v['menu_id']])?>">删除</a>
                         </td>
                     </tr>
                 <?php endforeach;?>

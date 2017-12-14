@@ -1,11 +1,11 @@
 <?php
 namespace backend\models\admin\controllers;
 
+use backend\models\admin\model\RoleMapsModel;
 use Yii;
 use backend\controllers\BaseController;
 use backend\model\menu;
 use backend\models\admin\model\RoleModel;
-use common\helpers\FuncHelper;
 
 /**
  * Site controller
@@ -48,7 +48,6 @@ class AuthController extends BaseController
                 'auth' => $data
             ]);
         }
-
     }
 
     public function actionAuth()
@@ -72,7 +71,7 @@ class AuthController extends BaseController
 
             if ($this->_model->load($data, '') && $this->_model->validate()) {
                 if (empty($id)) {
-                    $res = $this->_model->insertRole($data);
+                    $res = $this->_model->addRole($data);
                 } else {
                     $res = $this->_model->updateRole($data);
                 }
@@ -107,19 +106,38 @@ class AuthController extends BaseController
 
     }
 
-    public function actionIcon()
+    /**
+     * 角色授权
+     *
+     * @return string
+     */
+    public function actionEditAuth()
     {
-        return $this->render('icon');
+        if (Yii::$app->request->isAjax) {
+            $roleId = Yii::$app->request->get('id');
+            $menu = new Menu();
+            $data = $menu->getMenuList1();
+            $roleMaps = new RoleMapsModel();
+            $menus = $roleMaps->getMenuIdsByRoleId($roleId);
+            return $this->render('auth', [
+                'menu' => $data,
+                'role_menus' => $menus,
+                'role_id' => $roleId
+            ]);
+        }
     }
 
-/*    public function actionAuth()
+    public function actionSaveAuth()
     {
-        $model = new Menu();
-        $data = $model->getMenuList1();
-        return $this->render('auth', [
-            'menu' => $data
-        ]);
-    }*/
-    
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $roleMaps = new RoleMapsModel();
+            if ($roleMaps->saveMenuIdsByRoleId($data)) {
+                return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+            } else {
+                return $this->resAjax($roleMaps->resLoginCode());
+            }
+        }
+    }
 
 }
