@@ -57,7 +57,7 @@ class AdminController extends BaseController
             $id = Yii::$app->request->get('id');
 
             $data = $this->_model->findAdminOne($id);
-            return $this->render('edit', [
+            return $this->renderPartial('edit', [
                 'admin' => $data
             ]);
         }
@@ -93,7 +93,7 @@ class AdminController extends BaseController
         $admin_id = Yii::$app->request->get('id');
         $admin = $this->_model->findAdminOne($admin_id);
         $data = $model->getAllRole();
-        return $this->render('auth', [
+        return $this->renderPartial('auth', [
             'admin_id' => $admin_id,
             'roles' => $data,
             'role_id' => $admin['role_id'],
@@ -138,7 +138,6 @@ class AdminController extends BaseController
                 } else {
                     $res = $this->_model->updateAdmin($data);
                 }
-
                 if ($res) {
                     return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
                 } else {

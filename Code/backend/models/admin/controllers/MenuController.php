@@ -40,7 +40,7 @@ class MenuController extends BaseController
             $menuId = Yii::$app->request->get('menu_id');
             $parentId = Yii::$app->request->get('parent_id', 0);
             $data = $this->_model->findMenuOne($menuId);
-            return $this->render('edit', [
+            return $this->renderPartial('edit', [
                 'menu' => $data,
                 'parent_id' => $parentId
             ]);
@@ -85,7 +85,28 @@ class MenuController extends BaseController
 
     public function actionAddAction()
     {
-        return $this->render('action');
+        $parentId = Yii::$app->request->get('parent_id');
+        $data = $this->_model->getAllAction($parentId);
+        return $this->renderPartial('action', [
+            'data' => $data,
+            'parent_id' => $parentId
+        ]);
+    }
+
+    public function actionSaveAction()
+    {
+        $parentId = Yii::$app->request->post('parent_id');
+        $data = Yii::$app->request->post('data') ? Yii::$app->request->post('data') : Yii::$app->request->post('new');
+        if (!empty(Yii::$app->request->post('new'))) {
+            $res = $this->_model->addAction(['parent_id' => $parentId, 'data' => $data]);
+        } else {
+            $res = $this->_model->updateAction($data);
+        }
+        if ($res) {
+            return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+        } else {
+            return $this->resAjax($this->_model->resLoginCode());
+        }
     }
 
     public function actionIcon()

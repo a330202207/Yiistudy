@@ -7,12 +7,12 @@ use yii\helpers\Url;
         <a class="layui-btn btn-add btn-default" dialog-type="load" href-info="<?=Url::toRoute(['auth/edit'])?>" w="30%" h="30%" lay-event="edit">添加角色</a>
     </span>
 </div>
-<table class="layui-table" lay-data="{height:315, url:'/admin/auth/auth', page:false, id:'test', method:'get'}" lay-filter="customer">
+<table class="layui-table" lay-data="{url:'/admin/auth/auth', page:false, id:'test', method:'get'}" lay-filter="customer">
     <thead>
         <tr>
-            <th lay-data="{field:'id', width:80}">ID</th>
-            <th lay-data="{field:'role_name', width:180}">角色名称</th>
-            <th lay-data="{field:'right', width:160, align:'center', toolbar:'#barOption'}">操作</th>
+            <th lay-data="{field:'id', width:100}">ID</th>
+            <th lay-data="{field:'role_name', width:1000}">角色名称</th>
+            <th lay-data="{field:'right', width:210, align:'center', toolbar:'#barOption'}">操作</th>
         </tr>
     </thead>
 </table>

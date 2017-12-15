@@ -44,4 +44,33 @@ class MenuModel extends Menu
         return $this->deleteAll(['menu_id' => $id]);
     }
 
+    public function getAllAction($id)
+    {
+        return static::findAll(['parent_id' => $id]);
+    }
+
+    public function addAction($data)
+    {
+        $parentId = $data['parent_id'];
+        $rows = [];
+        foreach ($data['data'] as $value) {
+            $rows[] = [
+                'parent_id' => $parentId,
+                'menu_name' => $value['menu_name'],
+                'action' => $value['action'],
+                'sort' => $value['sort'],
+            ];
+        }
+        return Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['parent_id', 'menu_name', 'action', 'sort'], $rows)->execute();
+    }
+
+    public function updateAction($data)
+    {
+        foreach ($data as $key => $value) {
+            $obj = self::findOne($key);
+            $obj->setAttributes($value);
+            $obj->save();
+        }
+    }
+
 }
