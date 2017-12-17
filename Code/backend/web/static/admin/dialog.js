@@ -119,6 +119,9 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
                     '<td><a class="layui-btn layui-btn-mini layui-btn-danger" onclick="$(\'#menu_action_' + action_num + '\').remove();" href-info="">删除</a></td> ' +
                 '</tr>';
             $("#action_list").append(html);
+        } else if (type == 'update') {
+            var data = $("#data").find('form').serializeArray();
+            ajax_form.AjaxFrom(href,'post',data,'','json');
         }
     });
 });

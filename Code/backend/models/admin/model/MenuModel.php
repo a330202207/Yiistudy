@@ -64,13 +64,15 @@ class MenuModel extends Menu
         return Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['parent_id', 'menu_name', 'action', 'sort'], $rows)->execute();
     }
 
-    public function updateAction($data)
+    public function updateSort($data)
     {
-        foreach ($data as $key => $value) {
-            $obj = self::findOne($key);
-            $obj->setAttributes($value);
-            $obj->save();
+        foreach ($data as $key => $val) {
+            $rows = array(
+                'menu_id' => (int) $key,
+                'sort' => (int) $val
+            );
         }
+        return Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['parent_id',  'sort'], $rows)->execute();
     }
 
 }

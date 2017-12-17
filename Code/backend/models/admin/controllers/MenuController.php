@@ -96,17 +96,35 @@ class MenuController extends BaseController
     public function actionSaveAction()
     {
         $parentId = Yii::$app->request->post('parent_id');
-        $data = Yii::$app->request->post('data') ? Yii::$app->request->post('data') : Yii::$app->request->post('new');
-        if (!empty(Yii::$app->request->post('new'))) {
-            $res = $this->_model->addAction(['parent_id' => $parentId, 'data' => $data]);
-        } else {
-            $res = $this->_model->updateAction($data);
+        $data = Yii::$app->request->post('data');
+        $newData = Yii::$app->request->post('new');
+
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $obj = $this->_model->findOne($key);
+                $obj->setAttributes($value);
+                $obj->save();
+            }
         }
-        if ($res) {
-            return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
-        } else {
-            return $this->resAjax($this->_model->resLoginCode());
+        if (!empty($newData)) {
+            if (!$this->_model->addAction(['parent_id' => $parentId, 'data' => $data])) {
+                return $this->resAjax($this->_model->resLoginCode());
+            }
         }
+        return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+    }
+
+    public function actionUpdate()
+    {
+        $sort = Yii::$app->request->post('sort');
+        if (!empty($sort)) {
+            foreach ($sort as $key => $value) {
+                $obj = $this->_model->findOne($key);
+                $obj->setAttributes($value);
+                $obj->save();
+            }
+        }
+        return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
     }
 
     public function actionIcon()
