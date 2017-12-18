@@ -46,7 +46,7 @@ class MenuModel extends Menu
 
     public function getAllAction($id)
     {
-        return static::findAll(['parent_id' => $id]);
+        return $this->find()->where(['parent_id' => $id])->orderBy('sort ASC')->asArray()->all();
     }
 
     public function addAction($data)

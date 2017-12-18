@@ -26,7 +26,7 @@ use yii\helpers\Url;
                 <td><input type="text" name="data[<?= $value['menu_id'] ?>][menu_name]" class="layui-input" value="<?= $value['menu_name'] ?>" /></td>
                 <td><input type="text" name="data[<?= $value['menu_id'] ?>][action]" class="layui-input" value="<?= $value['action'] ?>" /></td>
                 <td><input type="number" name="data[<?= $value['menu_id'] ?>][sort]" class="layui-input" value="<?= $value['sort'] ?>" /></td>
-                <td><a class="layui-btn layui-btn-mini layui-btn-danger" href-info="<?= Url::toRoute(['menu/action-delete', 'menu_id' => $value['menu_id']]) ?>">删除</a></td>
+                <td><a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="delete" href-info="<?= Url::toRoute(['menu/delete', 'menu_id' => $value['menu_id']]) ?>">删除</a></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

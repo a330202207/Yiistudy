@@ -113,9 +113,20 @@ class MenuController extends BaseController
             }
         }
         if (!empty($newData)) {
-            if (!$this->_model->addAction(['parent_id' => $parentId, 'data' => $data])) {
+            if (!$this->_model->addAction(['parent_id' => $parentId, 'data' => $newData])) {
                 return $this->resAjax($this->_model->resLoginCode());
             }
+        }
+        return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
+    }
+
+    public function actionUpdate()
+    {
+        $sort = Yii::$app->request->post('sort');
+        foreach ($sort as $key => $value) {
+            $obj = $this->_model->findOne($key);
+            $obj->sort = $value;
+            $obj->save();
         }
         return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
     }
