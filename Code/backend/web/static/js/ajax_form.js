@@ -16,7 +16,6 @@ layui.define(['form', 'table','layer', 'element'], function (exports) {
                 data: data ? data : {},
                 dataType: dataType ? dataType : 'json',
                 success: function (result) {
-                    console.log(location);return false;
                     if (result.code == 0) {
                         parent.layer.close(index);
                         parent.layer.msg(result.err, { icon: 1, shade: 0.4,time: 1000 });

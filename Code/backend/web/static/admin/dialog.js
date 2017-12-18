@@ -83,7 +83,6 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
         var h = $(that).attr('h');
 
         if (type === 'delete') { //编辑
-            console.log(location);return false;
             layer.confirm('确定要删除该条数据？', { icon: 3 }, function (index) {
                 ajax_form.AjaxFrom(href,'get','',index,'json');
             });
@@ -100,7 +99,6 @@ layui.use(['table', 'form', 'layer', 'ajax_form','vip_table'], function () {
                 options.offset = ['100px'];
                 options.btn = ['保存', '取消'];
                 options.yes = function (index, layero) {
-                    console.log(location);return false;
                     var url = layero.find('form').attr("action");
                     var form_data = layero.find('form').serializeArray();
                     ajax_form.AjaxFrom(url,'post',form_data,index,'');
