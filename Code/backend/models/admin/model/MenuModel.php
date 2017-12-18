@@ -55,22 +55,22 @@ class MenuModel extends Menu
         $rows = [];
         foreach ($data['data'] as $value) {
             $rows[] = [
-                'parent_id' => $parentId,
-                'menu_name' => $value['menu_name'],
-                'action' => $value['action'],
-                'sort' => $value['sort'],
+                'parent_id' => (int)$parentId,
+                'menu_name' => htmlspecialchars($value['menu_name'], ENT_QUOTES, 'UTF-8'),
+                'action' => htmlspecialchars($value['action'], ENT_QUOTES, 'UTF-8'),
+                'sort' => (int)$value['sort'],
             ];
         }
         return Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['parent_id', 'menu_name', 'action', 'sort'], $rows)->execute();
     }
 
-    public function updateAction($data)
+/*    public function updateAction($data)
     {
         foreach ($data as $key => $value) {
             $obj = self::findOne($key);
             $obj->setAttributes($value);
             $obj->save();
         }
-    }
+    }*/
 
 }
