@@ -15,7 +15,7 @@ $this->title = '菜单管理';
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe id="iframe" name="iframe" src="<?=Url::toRoute(['site/welcome'])?>" frameborder="0"></iframe>
+                <iframe id="iframe" name="iframe" lay-filter="demo" src="<?=Url::toRoute(['site/welcome'])?>" frameborder="0"></iframe>
             </div>
         </div>
     </div>

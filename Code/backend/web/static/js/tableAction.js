@@ -1,11 +1,7 @@
-/**
- * Created by Administrator on 2017/08/25.
- * @name:   vip-admin 后台模板 表格JS功能
- * @author: 随丶
- */
-layui.define(['layer', 'element'], function (exports) {
+layui.define(['layer', 'element', 'table'], function (exports) {
 
-    var $ = layui.jquery;
+    var table = layui.table,
+        $ = layui.jquery;
 
     // 封装方法
     var mod = {
@@ -40,9 +36,9 @@ layui.define(['layer', 'element'], function (exports) {
                     layer.close(index);
                 });
             }
-        }
+        },
         // 转换时间戳为日期时间(时间戳,是否只显示年月日时分,8)
-        ,unixToDate: function (unixTime, isFull, timeZone) {
+        unixToDate: function (unixTime, isFull, timeZone) {
             if (unixTime == '' || unixTime == null) {
                 return '';
             }
@@ -91,9 +87,9 @@ layui.define(['layer', 'element'], function (exports) {
                 // ymdhis += seconds;
             }
             return ymdhis;
-        }
+        },
         // 批量删除 返回需要的 ids
-        ,getIds: function (o, str) {
+        getIds: function (o, str) {
             var obj = o.find('tbody tr td:first-child input[type="checkbox"]:checked');
             var list = '';
             obj.each(function (index, elem) {
@@ -102,14 +98,23 @@ layui.define(['layer', 'element'], function (exports) {
             // 去除最后一位逗号
             list = list.substr(0, (list.length - 1));
             return list;
-        }
+        },
         // 获取高度
-        ,getFullHeight: function(){
+        getFullHeight: function(){
             return $(window).height() - ( $('.my-btn-box').outerHeight(true) ? $('.my-btn-box').outerHeight(true) + 35 :  40 );
-        }
+        },
+
+        //获取表格事件
+        getTableEvent:function () {
+            var event = '';
+            //一些事件监听
+            element.on('tab(demo)', function(data){
+                console.log(data);
+            });
+        },
     };
 
     // 输出
-    exports('vip_table', mod);
+    exports('tableAction', mod);
 });
 

@@ -7,10 +7,11 @@
 layui.config({
     base: './frame/static/js/'  // 模块目录
 }).extend({                     // 模块别名
-    vip_nav: 'vip_nav'
-    , vip_tab: 'vip_tab'
-    , vip_table: 'vip_table'
-    , ajax_form: 'ajax_form'
+    nav: 'nav'
+    , tab: 'tab'
+    , table: 'table'
+    , dialog: 'dialog'
+    , ajaxForm: 'ajaxForm'
 });
 
 // 主入口方法

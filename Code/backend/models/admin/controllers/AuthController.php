@@ -44,7 +44,7 @@ class AuthController extends BaseController
         if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->get('id');
             $data = $this->_model->findRoleOne($id);
-            return $this->renderPartial('edit', [
+            return $this->render('edit', [
                 'auth' => $data
             ]);
         }
@@ -119,7 +119,7 @@ class AuthController extends BaseController
             $data = $menu->getMenuList1();
             $roleMaps = new RoleMapsModel();
             $menus = $roleMaps->getMenuIdsByRoleId($roleId);
-            return $this->renderPartial('auth', [
+            return $this->render('auth', [
                 'menu' => $data,
                 'role_menus' => $menus,
                 'role_id' => $roleId

@@ -1,10 +1,7 @@
-layui.define(['form', 'table','layer', 'element'], function (exports) {
+layui.define(['layer'], function (exports) {
     // 操作对象
     var layer = layui.layer
-        , element = layui.element
-        , $ = layui.jquery
-        , table = layui.table
-        , form = layui.form;
+        ,$ = layui.jquery;
 
     // 封装方法
     var mod = {
@@ -17,21 +14,21 @@ layui.define(['form', 'table','layer', 'element'], function (exports) {
                 dataType: dataType ? dataType : 'json',
                 success: function (result) {
                     if (result.code == 0) {
-                        parent.layer.close(index);
-                        parent.layer.msg(result.err, { icon: 1, shade: 0.4,time: 1000 });
+                        layer.close(index);
+                        layer.msg(result.err, { icon: 1, shade: 0.4,time: 1000 });
                         location.reload();
                     } else {
-                        parent.layer.msg(result.err, { icon: 2, shade: 0.4, time: 1000 });
+                        layer.msg(result.err, { icon: 2, shade: 0.4, time: 1000 });
                     }
                 }, error: function (error) {
-                    parent.layer.alert(error.responseText, { icon: 2, title: '提示' });
+                    layer.alert(error.responseText, { icon: 2, title: '提示' });
                 }
             });
         }
     };
 
     // 输出
-    exports('ajax_form', mod);
+    exports('ajaxForm', mod);
 });
 
 

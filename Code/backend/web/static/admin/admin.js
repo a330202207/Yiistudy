@@ -1,11 +1,7 @@
 layui.use(['table', 'form', 'layer', 'vip_table'], function () {
 
     // 操作对象
-    var form = layui.form
-        , table = layui.table
-        , layer = layui.layer
-        , vipTable = layui.vip_table
-        , $ = layui.jquery;
+    var table = layui.table, layer = layui.layer, vipTable = layui.vip_table, $ = layui.jquery;
 
     // 表格渲染
     var tableIns = table.render({

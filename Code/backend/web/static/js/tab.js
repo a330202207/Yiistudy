@@ -23,7 +23,7 @@ layui.define('layer', function (exports) {
     };
 
     // 输出
-    exports('vip_tab', mod);
+    exports('tab', mod);
 });
 
 

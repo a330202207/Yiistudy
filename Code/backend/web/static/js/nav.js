@@ -67,7 +67,7 @@ layui.define(['layer', 'element'], function (exports) {
     };
 
     // 输出
-    exports('vip_nav', mod);
+    exports('nav', mod);
 });
 
 
