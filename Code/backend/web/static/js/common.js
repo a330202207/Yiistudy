@@ -73,10 +73,6 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         var src = url ? url : elem.children('a').attr('href-url');      // 导航栏跳转URL
         var id = new Date().getTime();                                  // ID
         var flag = getTitleId(card, title);                             // 是否有该选项卡存在
-        console.log(title);
-        console.log(src);
-        console.log(id);
-        console.log(flag);
         // 大于0就是有该选项卡了
         if (flag > 0) {
             id = flag;
@@ -94,8 +90,6 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         }
         // 切换相应的ID tab
         element.tabChange(card, id);
-        // 提示信息
-        layer.msg(title);
     };
 
     // 监听顶部左侧导航

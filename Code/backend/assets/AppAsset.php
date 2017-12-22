@@ -12,10 +12,15 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [];
-    public $js = [];
+    public $css = [
+        'static/layui/css/layui.css',
+        'static/css/style.css',
+    ];
+    public $js = [
+        'static/layui/layui.js',
+    ];
     public $depends = [
-        'backend\assets\LayoutAsset',
+//        'backend\assets\LayoutAsset',
     ];
 
     public $jsOptions = ['position' => View::POS_END];

@@ -6,7 +6,7 @@ $this->title = '菜单管理';
 \backend\assets\LayoutAsset::register($this);
 ?>
 <?= $this->render('_header'); ?>
-<?= $this->render('_left_menu'); ?>
+<?= $this->render('_left-menu'); ?>
 <div class="layui-body my-body">
     <div class="layui-tab layui-tab-card my-tab" lay-filter="card" lay-allowClose="true">
         <ul class="layui-tab-title">
