@@ -3,6 +3,7 @@
 namespace backend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * Main backend application asset bundle.
@@ -11,20 +12,14 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-        'static/layui/css/layui.css',
-        'static/css/style.css',
-    ];
-    public $js = [
-//        'static/layui/layui.js',
-        'static/layui/layui.all.js',
-        'static/js/index.js',
-//        'static/admin/dialog.js',
-    ];
+    public $css = [];
+    public $js = [];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'backend\assets\LayoutAsset',
     ];
+
+    public $jsOptions = ['position' => View::POS_END];
+    public $cssOptions = ['position' => View::POS_HEAD];
     /**
      * ------------------------------------------
      * 定义按需加载JS方法，注意加载顺序在最后

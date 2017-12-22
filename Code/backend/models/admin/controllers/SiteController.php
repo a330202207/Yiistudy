@@ -107,7 +107,7 @@ class SiteController extends BaseController
 
     public function actionWelcome()
     {
-        return $this->render('welcome');
+        return $this->renderContent('welcome');
     }
 
     public function actionLogout()

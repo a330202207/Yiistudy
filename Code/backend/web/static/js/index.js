@@ -4,7 +4,7 @@ layui.config({
 }).extend({                         // 模块别名
       // nav: 'nav',
     // tab: 'tab',
-    tableAction: 'tableAction',
+    // tableAction: 'tableAction',
     // dialog: 'dialog',
     // ajaxForm: 'ajaxForm',
 });

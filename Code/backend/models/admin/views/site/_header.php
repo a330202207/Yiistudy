@@ -1,6 +1,5 @@
 <div class="layui-header my-header">
     <a href="index.html">
-        <!--<img class="my-header-logo" src="" alt="logo">-->
         <div class="my-header-logo">后台模板 HTML</div>
     </a>
     <div class="my-header-btn">
@@ -8,9 +7,7 @@
     </div>
 
     <!-- 顶部左侧添加选项卡监听 -->
-    <ul class="layui-nav" lay-filter="side-top-left">
-        <li class="layui-nav-item"><a href="javascript:;" class="pay" href-url="">前台首页</a></li>
-    </ul>
+    <ul class="layui-nav" lay-filter="side-top-left"></ul>
 
     <!-- 顶部右侧添加选项卡监听 -->
     <ul class="layui-nav my-header-user-nav" lay-filter="side-top-right">

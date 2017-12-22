@@ -9,7 +9,7 @@
 
     <!-- 顶部左侧添加选项卡监听 -->
     <ul class="layui-nav" lay-filter="side-top-left">
-        <li class="layui-nav-item"><a href="javascript:;" class="pay" href-url="">前台首页</a></li>
+<!--        <li class="layui-nav-item"><a href="javascript:;" class="pay" href-url="">前台首页</a></li>-->
     </ul>
 
     <!-- 顶部右侧添加选项卡监听 -->
@@ -32,3 +32,16 @@
         </li>
     </ul>
 </div>
+<script type="text/javascript">
+    layui.use(['navAction'], function () {
+
+        // 操作对象
+        var navAction = layui.navAction;
+
+        // 顶部菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        navAction.headerMenu('/admin/menu/getTopMenu', 'side-top-left', false);
+        // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        // navAction.leftMenu('./json/', 'side-main', false);
+
+    });
+</script>

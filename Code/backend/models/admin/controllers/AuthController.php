@@ -116,7 +116,7 @@ class AuthController extends BaseController
         if (Yii::$app->request->isAjax) {
             $roleId = Yii::$app->request->get('id');
             $menu = new Menu();
-            $data = $menu->getMenuList1();
+            $data = $menu->getMenuList();
             $roleMaps = new RoleMapsModel();
             $menus = $roleMaps->getMenuIdsByRoleId($roleId);
             return $this->render('auth', [

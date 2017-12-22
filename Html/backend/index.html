@@ -1,114 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>layout 后台大布局 - Layui</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="format-detection" content="telephone=no">
-
-  <link rel="stylesheet" href="./css/layui.css"  media="all">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>首页 · 后台模板 HTML</title>
+    <link rel="stylesheet" href="frame/layui/css/layui.css">
+    <link rel="stylesheet" href="./frame/static/css/style.css">
+    <link rel="icon" href="./frame/static/image/code.png">
 </head>
 <body>
-<div class="layui-layout layui-layout-admin">
-  <div class="layui-header">
-    <div class="layui-logo">layui 后台布局</div>
-    <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">控制台</a></li>
-      <li class="layui-nav-item"><a href="">商品管理</a></li>
-      <li class="layui-nav-item"><a href="">用户</a></li>
-      <li class="layui-nav-item">
-        <a href="javascript:;">其它系统</a>
-        <dl class="layui-nav-child">
-          <dd><a href="">邮件管理</a></dd>
-          <dd><a href="">消息管理</a></dd>
-          <dd><a href="">授权管理</a></dd>
-        </dl>
-      </li>
-    </ul>
-    <ul class="layui-nav layui-layout-right">
-      <li class="layui-nav-item">
-        <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          贤心
+
+<!-- layout admin -->
+<div class="layui-layout layui-layout-admin"> <!-- 添加skin-1类可手动修改主题为纯白，添加skin-2类可手动修改主题为蓝白 -->
+    <!-- header -->
+    <div class="layui-header my-header">
+        <a href="index.html">
+            <div class="my-header-logo">YiiStudy后台模板</div>
         </a>
-        <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">安全设置</a></dd>
-        </dl>
-      </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
-    </ul>
-  </div>
-
-  <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:;">所有商品</a>
-          <dl class="layui-nav-child">
-            <dd><a href="#">列表</a></dd>
-            <dd><a href="javascript:;">详情页面</a></dd>
-            <dd><a href="javascript:;">列表三</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">解决方案</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
-        <li class="layui-nav-item"><a href="">发布商品</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="layui-body">
-    <!-- 内容主体区域 -->
-    <div class="layui-tab layui-tab-card" lay-allowclose="true">
-      <ul class="layui-tab-title">
-        <li class="layui-this">网站设置</li>
-        <li>用户基本管理</li>
-        <li>权限分配</li>
-        <li>商品管理</li>
-        <li>订单管理</li>
-      </ul>
-      <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show">
-          1. 我个人比较喜欢卡片风格的，所以你发现又是以卡片的风格举例
-          2. 删除功能适用于所有风格
+        <div class="my-header-btn">
+            <button class="layui-btn layui-btn-small btn-nav"><i class="layui-icon">&#xe65f;</i></button>
         </div>
-        <div class="layui-tab-item">2</div>
-        <div class="layui-tab-item">3</div>
-        <div class="layui-tab-item">4</div>
-        <div class="layui-tab-item">5</div>
-        <div class="layui-tab-item">6</div>
-      </div>
+
+        <!-- 顶部左侧添加选项卡监听 -->
+        <ul class="layui-nav" lay-filter="side-top-left">
+        </ul>
+
+        <!-- 顶部右侧添加选项卡监听 -->
+        <ul class="layui-nav my-header-user-nav" lay-filter="side-top-right">
+            <li class="layui-nav-item">
+                <a class="name" href="javascript:;"><i class="layui-icon">&#xe629;</i>主题</a>
+                <dl class="layui-nav-child">
+                    <dd data-skin="0"><a href="javascript:;">默认</a></dd>
+                    <dd data-skin="1"><a href="javascript:;">纯白</a></dd>
+                    <dd data-skin="2"><a href="javascript:;">蓝白</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a class="name" href="javascript:;"><img src="./frame/static/image/code.png" alt="logo"> Admin </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>修改密码</a>
+                    </dd>
+                    <dd><a href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+
     </div>
-  </div>
-
-  <div class="layui-footer">
-    <!-- 底部固定区域 -->
-    © layui.com - 底部固定区域
-  </div>
+    <!-- side -->
+    <div class="layui-side my-side">
+        <div class="layui-side-scroll">
+            <!-- 左侧主菜单添加选项卡监听 -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="side-main">
+            </ul>
+        </div>
+    </div>
+    <!-- body -->
+    <div class="layui-body my-body">
+        <div class="layui-tab layui-tab-card my-tab" lay-filter="card" lay-allowClose="true">
+            <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="1"><span><i class="layui-icon">&#xe638;</i>欢迎页</span></li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe id="iframe" src="demo/welcome.html" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="layui-footer my-footer">
+        <p>
+            <a href="http://vip-admin.com" target="_blank">Yiistudy后台模板</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="#" target="_blank">Yiistudy后台模板</a>
+        </p>
+        <p>2017 © copyright</p>
+    </div>
 </div>
-<script src="./js/layui.all.js" charset="utf-8"></script>
-<script>
-  //JavaScript代码区域
-  layui.use('element', function(){
-    var element = layui.element;
 
-  });
+<!-- 右键菜单 -->
+<div class="my-dblclick-box none">
+    <table class="layui-tab dblclick-tab">
+        <tr class="card-refresh">
+            <td><i class="layui-icon">&#x1002;</i>刷新当前标签</td>
+        </tr>
+        <tr class="card-close">
+            <td><i class="layui-icon">&#x1006;</i>关闭当前标签</td>
+        </tr>
+        <tr class="card-close-all">
+            <td><i class="layui-icon">&#x1006;</i>关闭所有标签</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" src="frame/layui/layui.js"></script>
+<script type="text/javascript" src="./frame/static/js/common.js"></script>
+<script type="text/javascript" src="./frame/static/js/menu.js"></script>
+<script type="text/javascript">
+    layui.use(['navAction'], function () {
+
+        // 操作对象
+        var navAction = layui.navAction;
+
+        // 顶部菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        navAction.headerMenu('./json/header_menu.json', 'side-top-left', false);
+        // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
+        navAction.leftMenu('./json/left_menu.json', 'side-main', false);
+
+    });
 </script>
 </body>
 </html>

@@ -252,12 +252,13 @@ class FuncHelper
      * @param array   $list   要转换的数据集
      * @param string  $pk     主键id
      * @param string  $pid    parent标记字段
-     * @param string  $child  子类
+     * @param int     $type   显示子分类类型：1：不带|--，2：带|--
      * @param integer $root   level标记字段
      * @return array
      */
-    public static function list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_child', $root = 0)
+    public static function list_to_tree($list, $pk = 'id', $pid = 'pid', $root = 0, $type = 1)
     {
+
         // 创建Tree
         $tree = array();
         if (is_array($list)) {
@@ -274,8 +275,10 @@ class FuncHelper
                 } else {
                     if (isset($refer[$parentId])) {
                         $parent = &$refer[$parentId];
-                        $list[$key]['menu_name'] = '&nbsp;&nbsp;&nbsp;&nbsp;|--' . $list[$key]['menu_name'];
-                        $parent[$child][] = &$list[$key];
+                        if ($type == 2) {
+                            $list[$key]['menu_name'] = '&nbsp;&nbsp;&nbsp;&nbsp;|--' . $list[$key]['menu_name'];
+                        }
+                        $parent['_child'][] = &$list[$key];
                     }
                 }
             }
@@ -311,7 +314,9 @@ class FuncHelper
                 } else {
                     if (isset($refer[$parentId])) {
                         $parent = &$refer[$parentId];
-                        $list[$key]['menu_name'] = $list[$key]['menu_name'];
+                        if ($type == 2) {
+                            $list[$key]['menu_name'] = '&nbsp;&nbsp;&nbsp;&nbsp;|--' . $list[$key]['menu_name'];
+                        }
                         $parent[$child][] = &$list[$key];
                     }
                 }

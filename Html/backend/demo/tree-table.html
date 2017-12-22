@@ -76,21 +76,21 @@
             , done: function (res, curr, count) {
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
+                // console.log(res);
 
                 //得到当前页码
-                console.log(curr);
+                // console.log(curr);
 
                 //得到数据总量
-                console.log(count);
+                // console.log(count);
             }
         });
 
         // 获取选中行
         table.on('checkbox(dataCheck)', function (obj) {
-            console.log(obj.checked); //当前是否选中状态
+            /*console.log(obj.checked); //当前是否选中状态
             console.log(obj.data); //选中行的相关数据
-            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+            console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one*/
         });
 
         // 树        更多操作请查看 http://www.layui.com/demo/tree.html
@@ -127,6 +127,30 @@
         });
 
         // you code ...
+        table.on('tool(dataCheck)', function(obj){
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event; //获得 lay-event 对应的值
+        var tr = obj.tr; //获得当前行 tr 的DOM对象
+        console.log(data);
+        console.log(layEvent);
+        console.log(tr);
+        return false;
+        if(layEvent === 'detail'){ //查看
+            //do somehing
+        } else if(layEvent === 'del'){ //删除
+            /* layer.confirm('真的删除行么', function(index){
+             obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+             layer.close(index);
+             });*/
+        } else if(layEvent === 'edit'){ //编辑
+
+            //同步更新缓存对应的值
+            /* obj.update({
+             username: '123'
+             ,title: 'xxx'
+             });*/
+        }
+    });
 
 
     });

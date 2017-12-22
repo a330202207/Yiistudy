@@ -1,6 +1,6 @@
-layui.use(['table', 'layer', 'ajaxForm', 'table'], function () {
+layui.use(['table', 'layer', 'ajaxFormAction', 'tableAction'], function () {
     // 操作对象
-    var table = layui.table,
+    var tableAction = layui.tableAction,
         layer = layui.layer,
         ajaxForm = layui.ajaxForm,
         $ = layui.jquery;

@@ -15,11 +15,11 @@ layui.define(['layer', 'element'], function (exports) {
                 if (res.code == 1) {
                     $(res.data).each(function (k, v) {
                         // v.menu_name && treeStatus ? view += '<li class="layui-nav-item layui-nav-itemed">' : view += '<li class="layui-nav-item">';
-                        view += '<li class="layui-nav-item" menu-id="' + v.menu_id + '">';
+                        v.menu_name ? view += '<li class="layui-nav-item">' : view += '<li class="layui-nav-item">';
                         if (v._child) {
-                            view += '<a href="javascript:;"><i class="layui-icon">' + v.icon + '</i>' + v.menu_name + '</a><dl class="layui-nav-child">';
+                            view += '<a href=""><i class="layui-icon">' + v.icon + '</i>' + v.menu_name + '</a><dl class="layui-nav-child">';
                             $(v._child).each(function (ko, vo) {
-                                view += '<dd><a href="javascript:;" menu-id="' + vo.menu_id + '" href-url="' + vo.action + '"><i class="layui-icon">' + vo.icon + '</i>' + vo.menu_name + '</a></dd>';
+                                view += '<dd><a href="javascript:;" href-url="' + vo.action + '"><i class="layui-icon">' + vo.icon + '</i>' + vo.menu_name + '</a></dd>';
                             });
                             view += '</dl>';
                         } else {

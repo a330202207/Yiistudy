@@ -28,10 +28,33 @@ class MenuController extends BaseController
      */
     public function actionIndex()
     {
-        $menu = $this->_model->getMenuList();
+        $menu = $this->_model->getMenuList(0, 2);
         return $this->render('index', [
             'menu' => $menu
         ]);
+    }
+
+    /**
+     * 获取顶级菜单
+     *
+     * @return string
+     */
+    public function actionGetAllTopMenu()
+    {
+        $menu = $this->_model->getAllTopMenu();
+        return $this->resAjax($menu);
+    }
+
+    public function actionGetChildMenu()
+    {
+        $parentId = Yii::$app->request->get('menu_id');
+        $menu = $this->_model->getMenuList($parentId);
+        $res = [
+            'code' => 1,
+            'msg' => '',
+            'data' => $menu,
+        ];
+        return $this->resAjax($res);
     }
 
     public function actionEdit()

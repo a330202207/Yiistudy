@@ -1,0 +1,166 @@
+{
+    "code": 1,
+    "msg": "",
+    "data": [
+        {
+            "menu_id": "1",
+            "parent_id": "0",
+            "menu_name": "系统",
+            "sort": "2",
+            "action": "",
+            "icon": "",
+            "is_show": "1",
+            "status": "10",
+            "_child": [
+                {
+                    "menu_id": "6",
+                    "parent_id": "1",
+                    "menu_name": "网站设置",
+                    "sort": "1",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10"
+                },
+                {
+                    "menu_id": "7",
+                    "parent_id": "1",
+                    "menu_name": "数据备份",
+                    "sort": "3",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10",
+                    "_child": [
+                        {
+                            "menu_id": "17",
+                            "parent_id": "7",
+                            "menu_name": "添加数据",
+                            "sort": "100",
+                            "action": "Data/add",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        },
+                        {
+                            "menu_id": "18",
+                            "parent_id": "7",
+                            "menu_name": "删除数据",
+                            "sort": "100",
+                            "action": "Data/del",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        },
+                        {
+                            "menu_id": "19",
+                            "parent_id": "7",
+                            "menu_name": "编辑数据",
+                            "sort": "100",
+                            "action": "Data/edit",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        }
+                    ]
+                },
+                {
+                    "menu_id": "12",
+                    "parent_id": "1",
+                    "menu_name": "管理员管理",
+                    "sort": "4",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10",
+                    "_child": [
+                        {
+                            "menu_id": "14",
+                            "parent_id": "12",
+                            "menu_name": "编辑管理员1",
+                            "sort": "2",
+                            "action": "Admin/edit",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        },
+                        {
+                            "menu_id": "15",
+                            "parent_id": "12",
+                            "menu_name": "删除管理员2",
+                            "sort": "1",
+                            "action": "Admin/delete",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        },
+                        {
+                            "menu_id": "13",
+                            "parent_id": "12",
+                            "menu_name": "新增管理员3",
+                            "sort": "3",
+                            "action": "Admin/add",
+                            "icon": "",
+                            "is_show": "1",
+                            "status": "10"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "menu_id": "3",
+            "parent_id": "0",
+            "menu_name": "后台菜单管理",
+            "sort": "1",
+            "action": "",
+            "icon": "",
+            "is_show": "1",
+            "status": "10",
+            "_child": [
+                {
+                    "menu_id": "4",
+                    "parent_id": "3",
+                    "menu_name": "菜单列表",
+                    "sort": "1",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10"
+                },
+                {
+                    "menu_id": "5",
+                    "parent_id": "3",
+                    "menu_name": "新增菜单",
+                    "sort": "2",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10"
+                }
+            ]
+        },
+        {
+            "menu_id": "20",
+            "parent_id": "0",
+            "menu_name": "一级菜单",
+            "sort": "100",
+            "action": "",
+            "icon": "",
+            "is_show": "1",
+            "status": "10",
+            "_child": [
+                {
+                    "menu_id": "21",
+                    "parent_id": "20",
+                    "menu_name": "二级菜单1",
+                    "sort": "100",
+                    "action": "",
+                    "icon": "",
+                    "is_show": "1",
+                    "status": "10"
+                }
+            ]
+        }
+    ]
+}

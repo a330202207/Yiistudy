@@ -11,19 +11,26 @@ use backend\model\Menu;
 class MenuModel extends Menu
 {
 
-    public function findMenuOne($id)
+    public function getMenuOne($id)
     {
         return static::findOne(['menu_id' => $id]);
     }
 
-    public function getAllMenu()
+/*    public function getAllMenu()
     {
         return $this->find()->asArray()->all();
-    }
+    }*/
 
-    public function authUserRole()
+    //获取顶级菜单列表
+    public function getAllTopMenu()
     {
-
+        $menu = $this->find()->where(['parent_id' => 0])->asArray()->all();
+        $res = [
+            'code' => 1,
+            'msg' => '',
+            'data' => $menu,
+        ];
+        return $res;
     }
 
     public function addMenu($data)

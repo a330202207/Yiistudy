@@ -37,9 +37,14 @@
           "icon": "&#xe621;",
           "target": true,
           "href": "http://www.layui.com/demo/"
+        },{
+          "text": "icon组件",
+          "icon": "&#xe621;",
+          "href": "demo/icon.html"
         }
       ]
-    },{
+    },
+    {
       "text": "扩展",
       "icon": "&#xe628;",
       "href": "",
@@ -69,6 +74,10 @@
           "icon": "&#xe621;",
           "href": "demo/data-table.html"
         },{
+          "text": "data-table1 表格",
+          "icon": "&#xe621;",
+          "href": "demo/data-table_one.html"
+        },{
           "text": "tree-table 树表格",
           "icon": "&#xe621;",
           "href": "demo/tree-table.html"
@@ -80,17 +89,12 @@
           "text": "提示页",
           "icon": "&#xe621;",
           "href": "demo/tips.html"
+        },{
+          "text": "多窗口模式",
+          "icon": "&#xe621;",
+          "href": "demo/top.html"
         }
       ]
-    },{
-      "text": "子窗口操作",
-      "icon": "&#xe638;",
-      "href": "demo/children.html"
-    },{
-      "text": "加入群下载源码",
-      "icon": "&#xe601;",
-      "target": true,
-      "href": "//shang.qq.com/wpa/qunwpa?idkey=ad6ba602ae228be2222ddb804086e0cfa42da3d74e34b383b665c2bec1adfc6e"
     }
   ]
 }
