@@ -63,7 +63,7 @@ class Menu extends BaseActiveRecord
      */
     public function getMenuList($parentId = 0, $type = 1)
     {
-        $menu = $this->find()->where(['status' => self::STATUS_ACTIVE])->orderBy('sort ASC')->asArray()->all();
+        $menu = $this->find()->where(['status' => self::STATUS_ACTIVE, 'is_show' => 1])->orderBy('sort ASC')->asArray()->all();
         $menu = FuncHelper::list_to_tree($menu, 'menu_id', 'parent_id', $parentId, $type);
         return $menu;
     }

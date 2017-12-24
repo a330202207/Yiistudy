@@ -73,6 +73,7 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         var src = url ? url : elem.children('a').attr('href-url');      // 导航栏跳转URL
         var id = new Date().getTime();                                  // ID
         var flag = getTitleId(card, title);                             // 是否有该选项卡存在
+        // alert(src); return false;
         // 大于0就是有该选项卡了
         if (flag > 0) {
             id = flag;
@@ -93,7 +94,7 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
     };
 
     // 监听顶部左侧导航
-    element.on('nav(side-top-left)', function (elem) {
+    element.on('nav(side-top-left)', function () {
         var _this = this;
         var menuId =  $(_this).attr('menu-id');
         //左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]

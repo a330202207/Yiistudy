@@ -11,6 +11,6 @@ class LayoutAsset extends AssetBundle
     /* 全局JS文件 */
     public $js = [
         'static/js/common.js',
-        'static/js/menu.js',
+//        'static/js/menu.js',
     ];
 }

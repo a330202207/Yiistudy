@@ -17,14 +17,14 @@ class AppAsset extends AssetBundle
         'static/css/style.css',
     ];
     public $js = [
-        'static/layui/layui.js',
+        'static/layui/layui.all.js',
     ];
     public $depends = [
 //        'backend\assets\LayoutAsset',
     ];
 
-    public $jsOptions = ['position' => View::POS_END];
-    public $cssOptions = ['position' => View::POS_HEAD];
+//    public $jsOptions = ['position' => View::POS_END];
+//    public $cssOptions = ['position' => View::POS_HEAD];
     /**
      * ------------------------------------------
      * 定义按需加载JS方法，注意加载顺序在最后
@@ -32,9 +32,9 @@ class AppAsset extends AssetBundle
      * @param $jsfile string
      * ------------------------------------------
      */
-    public static function addScript($view, $jsfile) {
+/*    public static function addScript($view, $jsfile) {
         $view->registerJsFile($jsfile, [AppAsset::className(), 'depends' => 'backend\assets\AppAsset']);
-    }
+    }*/
 
     /**
      * ------------------------------------------
@@ -43,7 +43,7 @@ class AppAsset extends AssetBundle
      * @param $cssfile string
      * ------------------------------------------
      */
-    public static function addCss($view, $cssfile) {
+/*    public static function addCss($view, $cssfile) {
         $view->registerCssFile($cssfile, [AppAsset::className(), 'depends' => 'backend\assets\AppAsset']);
-    }
+    }*/
 }

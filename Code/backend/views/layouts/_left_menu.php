@@ -16,26 +16,6 @@ use yii\helpers\Url;
                     <dd><a href="<?= Url::toRoute('menu/index')?>"><i class="layui-icon"></i>菜单管理</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon"></i>日志中心
-                    <span class="layui-nav-more"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon"></i>登录页</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/login2.html"><i class="layui-icon"></i>登录页2</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon"></i>注册页</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon"></i>图表</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/add-edit.html"><i class="layui-icon"></i>添加-修改</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/data-table.html"><i class="layui-icon"></i>data-table 表格</a>
-                    </dd>
-                    <dd><a href="javascript:;" href-url="demo/tree-table.html"><i class="layui-icon"></i>tree-table 树表格</a>
-                    </dd>
-                    <dd><a href="javascript:;" href-url="demo/404.html"><i class="layui-icon"></i>404页</a></dd>
-                    <dd><a href="javascript:;" href-url="demo/tips.html"><i class="layui-icon"></i>提示页</a></dd>
-                    <dl></dl>
-                </dl>
-            </li>
         </ul>
     </div>
 </div>

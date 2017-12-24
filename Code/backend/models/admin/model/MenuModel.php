@@ -16,21 +16,17 @@ class MenuModel extends Menu
         return static::findOne(['menu_id' => $id]);
     }
 
-/*    public function getAllMenu()
-    {
-        return $this->find()->asArray()->all();
-    }*/
 
     //获取顶级菜单列表
-    public function getAllTopMenu()
+    static public function getAllTopMenu()
     {
-        $menu = $this->find()->where(['parent_id' => 0])->asArray()->all();
-        $res = [
+        $menu = self::find()->where(['parent_id' => 0])->asArray()->all();
+/*        $res = [
             'code' => 1,
             'msg' => '',
             'data' => $menu,
-        ];
-        return $res;
+        ];*/
+        return $menu;
     }
 
     public function addMenu($data)
