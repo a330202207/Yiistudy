@@ -28,7 +28,7 @@ layui.define(['layer'], function (exports) {
     };
 
     // 输出
-    exports('ajaxForm', mod);
+    exports('ajaxFormAction', mod);
 });
 
 

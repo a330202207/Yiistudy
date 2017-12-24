@@ -3,19 +3,16 @@ namespace backend\assets;
 
 use yii\web\AssetBundle;
 
-class LayoutAsset extends AssetBundle
+class CommonAsset extends AssetBundle
 {
     public $sourcePath = '@backend/web/static';
     /* 全局CSS文件 */
     public $css = [
-        'css/style.css',
     ];
     /* 全局JS文件 */
     public $js = [
-
-//        'js/menu.js',
-    ];
-    public $depends = [
-        'backend\assets\CommonAsset',
+        'layui/layui.all.js',
+        'js/common.js',
+        'js/dialog.js',
     ];
 }

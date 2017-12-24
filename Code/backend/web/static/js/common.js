@@ -1,10 +1,12 @@
 // 配置
 layui.config({
-    base: '/static/js/'  // 模块目录
+    base: '/static/js/'   // 模块目录
 }).extend({                     // 模块别名
     navAction: 'nav',
     tabAction: 'tab',
+    listAction: 'list',
     tableAction: 'table',
+    ajaxFormAction: 'ajaxForm',
 });
 
 // 主入口方法

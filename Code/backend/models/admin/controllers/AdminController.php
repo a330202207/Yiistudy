@@ -39,7 +39,6 @@ class AdminController extends BaseController
      */
     public function actionAjaxgetindexlist()
     {
-
         if (Yii::$app->request->isAjax) {
             $data = $this->_model->findAdminAll(Yii::$app->request->queryParams);
             return $this->resAjax($data);

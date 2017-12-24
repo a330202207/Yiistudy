@@ -10,21 +10,19 @@ use yii\web\View;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@backend/web/static';
     public $css = [
-        'static/layui/css/layui.css',
-        'static/css/style.css',
+        'layui/css/layui.css',
     ];
     public $js = [
-        'static/layui/layui.all.js',
+//        'js/menu.js',
     ];
     public $depends = [
-//        'backend\assets\LayoutAsset',
+        'backend\assets\CommonAsset',
     ];
 
-//    public $jsOptions = ['position' => View::POS_END];
-//    public $cssOptions = ['position' => View::POS_HEAD];
+    public $jsOptions = ['position' => View::POS_END];
+    public $cssOptions = ['position' => View::POS_HEAD];
     /**
      * ------------------------------------------
      * 定义按需加载JS方法，注意加载顺序在最后
@@ -32,9 +30,9 @@ class AppAsset extends AssetBundle
      * @param $jsfile string
      * ------------------------------------------
      */
-/*    public static function addScript($view, $jsfile) {
+    public static function addScript($view, $jsfile) {
         $view->registerJsFile($jsfile, [AppAsset::className(), 'depends' => 'backend\assets\AppAsset']);
-    }*/
+    }
 
     /**
      * ------------------------------------------
@@ -43,7 +41,7 @@ class AppAsset extends AssetBundle
      * @param $cssfile string
      * ------------------------------------------
      */
-/*    public static function addCss($view, $cssfile) {
+    public static function addCss($view, $cssfile) {
         $view->registerCssFile($cssfile, [AppAsset::className(), 'depends' => 'backend\assets\AppAsset']);
-    }*/
+    }
 }

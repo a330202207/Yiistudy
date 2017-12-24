@@ -1,8 +1,9 @@
 layui.use(['table', 'layer', 'ajaxFormAction', 'tableAction'], function () {
     // 操作对象
-    var tableAction = layui.tableAction,
+    var table = layui.table,
+        tableAction = layui.tableAction,
         layer = layui.layer,
-        ajaxForm = layui.ajaxForm,
+        ajaxForm = layui.ajaxFormAction,
         $ = layui.jquery;
     var action_num = 0;
 
@@ -61,7 +62,7 @@ layui.use(['table', 'layer', 'ajaxFormAction', 'tableAction'], function () {
                 options.yes = function (index, layero) {
                     var url = layero.find('form').attr("action");
                     var form_data = layero.find('form').serializeArray();
-                    ajax_form.AjaxFrom(url, 'post', form_data, index, 'json');
+                    ajaxForm.AjaxFrom(url, 'post', form_data, index, 'json');
                 };
                 options.btn2 = function (index, layero) {
                     parent.layer.close(index);
@@ -72,7 +73,7 @@ layui.use(['table', 'layer', 'ajaxFormAction', 'tableAction'], function () {
     });
 
     $(document).on("click", "a[lay-event]", function () {
-        var that = this;
+/*        var that = this;
         var type = $(that).attr('lay-event');
         var href = $(that).attr('href-info');
         var title = $(that).text();
@@ -123,10 +124,11 @@ layui.use(['table', 'layer', 'ajaxFormAction', 'tableAction'], function () {
         } else if (type == 'update') {
             var data = $("#data").find('form').serializeArray();
             ajax_form.AjaxFrom(href, 'post', data, '', 'json');
-        }
+        }*/
     });
 });
 
+/*
 layui.define(['layer', 'table', 'element', 'ajaxForm'], function (exports) {
     var layer = layui.layer,
         table = layui.table,
@@ -141,4 +143,4 @@ layui.define(['layer', 'table', 'element', 'ajaxForm'], function (exports) {
 
     // 输出
     exports('dialog', mod);
-});
+});*/
