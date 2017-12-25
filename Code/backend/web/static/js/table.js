@@ -1,6 +1,7 @@
-layui.define(['layer', 'element', 'table'], function (exports) {
+layui.define(['layer', 'element', 'table', 'dialog'], function (exports) {
 
     var table = layui.table,
+        dialog = layui.dialog,
         $ = layui.jquery;
 
     // 封装方法
@@ -104,32 +105,27 @@ layui.define(['layer', 'element', 'table'], function (exports) {
             return $(window).height() - ( $('.my-btn-box').outerHeight(true) ? $('.my-btn-box').outerHeight(true) + 35 : 40 );
         },
 
-        delDate: function () {
-            layer.confirm('确定要删除该条数据？', {icon: 3}, function (index) {
-                ajaxForm.AjaxFrom(href, 'get', {id: data.id}, index, 'json');
-            });
-        },
-
         //删除数据
-        delDate: function (href, data) {
+        delDate: function (href, obj) {
             layer.confirm('确定要删除该条数据？', {icon: 3}, function (index) {
-                // ajaxForm.AjaxFrom(href, 'get', {id: data.id}, index, 'json');
+                ajaxForm.AjaxFrom(href, 'get', {id: obj.data.id}, index, 'json');
             });
         },
 
-        //
+        //角色授权
         authUser:function () {
 
         },
-        doAction: function (event, href, data) {
-            switch (event) {
+        // doAction: function (event, href, data) {
+        doAction: function (obj, href, options) {
+            console.log(obj);
+            switch (obj.event) {
                 case 'auth':
-                    this.authUser(href, data);
-                    break;
                 case 'edit':
+                    dialog.dialogBox(href, options);
                     break;
                 case 'delete':
-                    this.delDate(href, data);
+                    this.delDate(href, obj);
                     break;
             }
         },
@@ -139,71 +135,16 @@ layui.define(['layer', 'element', 'table'], function (exports) {
             var _this = this;
             table.on('tool(customer)', function (obj) {
                 var that = this;
-                var data = obj.data; //获得当前行数据
-                var layEvent = obj.event; //获得 lay-event 对应的值
-                var id = data.id;
-
-                var href = $(that).attr('href-info');
-                var title = $(that).text();
-                var w = $(that).attr('w');
-                var h = $(that).attr('h');
-                _this.doAction(layEvent, href, data);
-
-
-
-
-/*                if (layEvent === 'detail') { //查看
-                    //do somehing
-                } else if (layEvent === 'delete') { //删除
-                    layer.confirm('确定要删除该条数据？', {icon: 3}, function (index) {
-                        ajaxForm.AjaxFrom(href, 'get', {id: id}, index, 'json');
-                    });
-                } else if (layEvent === 'auth') { //授权
-                    $.get(href, {id: id}, function (data) {
-                        var options = {};
-                        options.type = 1;
-                        options.area = [w, h];
-                        options.shade = 0.4;
-                        options.title = title;
-                        options.content = data;
-                        options.shadeClose = true;
-                        options.maxmin = true;
-                        options.offset = ['100px'];
-                        options.btn = ['保存', '取消'];
-                        options.yes = function (index, layero) {
-                            var url = layero.find('form').attr("action");
-                            var form_data = layero.find('form').serializeArray();
-                            ajaxForm.AjaxFrom(url, 'post', form_data, index, 'json');
-                        };
-                        options.btn2 = function (index, layero) {
-                            parent.layer.close(index);
-                        };
-                        parent.layer.open(options);
-                    }, 'html');
-
-                } else if (layEvent === 'edit') { //编辑
-                    $.get(href, {id: id}, function (data) {
-                        var options = {};
-                        options.type = 1;
-                        options.area = [w, h];
-                        options.shade = 0.4;
-                        options.title = title;
-                        options.content = data;
-                        options.shadeClose = true;
-                        options.maxmin = true;
-                        options.offset = ['100px'];
-                        options.btn = ['保存', '取消'];
-                        options.yes = function (index, layero) {
-                            var url = layero.find('form').attr("action");
-                            var form_data = layero.find('form').serializeArray();
-                            ajaxForm.AjaxFrom(url, 'post', form_data, index, 'json');
-                        };
-                        options.btn2 = function (index, layero) {
-                            parent.layer.close(index);
-                        };
-                        parent.layer.open(options);
-                    }, 'html');
-                }*/
+                var options = {
+                    'type':1,
+                    'area':[$(that).attr('w'), $(that).attr('h')],
+                    'title':$(that).text(),
+                    'shadeClose':true,
+                    'maxmin':true,
+                    'offset':['100px'],
+                    'btn':['保存', '取消']
+                };
+                _this.doAction(obj, href, options);
             });
         },
     };

@@ -7,6 +7,7 @@ layui.config({
     listAction: 'list',
     tableAction: 'table',
     ajaxFormAction: 'ajaxForm',
+    dialog: 'dialog',
 });
 
 // 主入口方法
@@ -75,7 +76,7 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         var src = url ? url : elem.children('a').attr('href-url');      // 导航栏跳转URL
         var id = new Date().getTime();                                  // ID
         var flag = getTitleId(card, title);                             // 是否有该选项卡存在
-        // alert(src); return false;
+
         // 大于0就是有该选项卡了
         if (flag > 0) {
             id = flag;
