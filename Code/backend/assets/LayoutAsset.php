@@ -12,8 +12,7 @@ class LayoutAsset extends AssetBundle
     ];
     /* 全局JS文件 */
     public $js = [
-
-//        'js/menu.js',
+        'js/common.js',
     ];
     public $depends = [
         'backend\assets\CommonAsset',

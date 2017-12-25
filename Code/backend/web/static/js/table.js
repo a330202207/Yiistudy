@@ -1,11 +1,13 @@
-layui.define(['layer', 'element', 'table', 'dialog'], function (exports) {
+layui.define('layer', function (exports) {
 
-    var table = layui.table,
-        dialog = layui.dialog,
+    // 操作对象
+    var layer = layui.layer,
+        formAction = layui.formAction,
         $ = layui.jquery;
 
     // 封装方法
     var mod = {
+
         // 删除公共方法   deleteAll(ids,请求的url,操作成功跳转url,操作失败跳转url)
         deleteAll: function (ids, url, sUrl, eUrl) {
             // ids不能为空
@@ -38,6 +40,7 @@ layui.define(['layer', 'element', 'table', 'dialog'], function (exports) {
                 });
             }
         },
+
         // 转换时间戳为日期时间(时间戳,是否只显示年月日时分,8)
         unixToDate: function (unixTime, isFull, timeZone) {
             if (unixTime == '' || unixTime == null) {
@@ -89,6 +92,7 @@ layui.define(['layer', 'element', 'table', 'dialog'], function (exports) {
             }
             return ymdhis;
         },
+
         // 批量删除 返回需要的 ids
         getIds: function (o, str) {
             var obj = o.find('tbody tr td:first-child input[type="checkbox"]:checked');
@@ -100,56 +104,53 @@ layui.define(['layer', 'element', 'table', 'dialog'], function (exports) {
             list = list.substr(0, (list.length - 1));
             return list;
         },
+
         // 获取高度
         getFullHeight: function () {
             return $(window).height() - ( $('.my-btn-box').outerHeight(true) ? $('.my-btn-box').outerHeight(true) + 35 : 40 );
         },
 
         //删除数据
-        delDate: function (href, obj) {
+        delData: function (obj, href) {
             layer.confirm('确定要删除该条数据？', {icon: 3}, function (index) {
-                ajaxForm.AjaxFrom(href, 'get', {id: obj.data.id}, index, 'json');
+                parent.submitForm(href, 'get', {id: obj.data.id}, index, 'json');
             });
         },
 
-        //角色授权
-        authUser:function () {
-
+        //编辑数据
+        editData:function (obj, href, options) {
+            $.get(href, {id: obj.data.id}, function (data) {
+                options.content = data;
+                options.yes = function (index, layero) {
+                    var url = layero.find('form').attr("action");
+                    var form_data = layero.find('form').serializeArray();
+                    parent.submitForm(url, 'post', form_data, index, 'json');
+                };
+                options.btn2 = function (index) {
+                    layer.close(index);
+                };
+                layer.open(options);
+            }, 'html');
         },
-        // doAction: function (event, href, data) {
+
+        //表格行内动作
         doAction: function (obj, href, options) {
-            console.log(obj);
             switch (obj.event) {
                 case 'auth':
                 case 'edit':
-                    dialog.dialogBox(href, options);
+                    this.editData(obj, href, options);
                     break;
                 case 'delete':
-                    this.delDate(href, obj);
+                    this.delData(obj, href);
                     break;
             }
         },
 
-        //获取表格事件
-        getTableEvent: function () {
-            var _this = this;
-            table.on('tool(customer)', function (obj) {
-                var that = this;
-                var options = {
-                    'type':1,
-                    'area':[$(that).attr('w'), $(that).attr('h')],
-                    'title':$(that).text(),
-                    'shadeClose':true,
-                    'maxmin':true,
-                    'offset':['100px'],
-                    'btn':['保存', '取消']
-                };
-                _this.doAction(obj, href, options);
-            });
-        },
     };
 
     // 输出
     exports('tableAction', mod);
 });
+
+
 

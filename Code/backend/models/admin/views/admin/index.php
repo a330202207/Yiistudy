@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use common\helpers\FuncHelper;
-//\backend\assets\AppAsset::register($this);
 ?>
 <div class="my-btn-box">
     <span class="fl">

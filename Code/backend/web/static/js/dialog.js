@@ -76,20 +76,6 @@ layui.define(['layer'], function (exports) {
         AjaxFrom: function (url, type, data, index, dataType) {
 
         },
-        dialogBox:function (href, options) {
-            $.get(href, {id: id}, function (data) {
-                options.content = data;
-                options.yes = function (index, layero) {
-                    var url = layero.find('form').attr("action");
-                    var form_data = layero.find('form').serializeArray();
-                    ajaxForm.AjaxFrom(url, 'post', form_data, index, 'json');
-                };
-                options.btn2 = function (index) {
-                    parent.layer.close(index);
-                };
-                parent.layer.open(options);
-            }, 'html');
-        }
     };
 
     // 输出

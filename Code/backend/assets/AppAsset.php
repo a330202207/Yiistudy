@@ -12,10 +12,10 @@ class AppAsset extends AssetBundle
 {
     public $sourcePath = '@backend/web/static';
     public $css = [
-        'layui/css/layui.css',
+
     ];
     public $js = [
-//        'js/menu.js',
+        'js/web.js',
     ];
     public $depends = [
         'backend\assets\CommonAsset',

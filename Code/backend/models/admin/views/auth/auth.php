@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-\backend\assets\AppAsset::register($this);
+//\backend\assets\AppAsset::register($this);
 //$this->registerJsFile('@web/static/admin/auth.js', ['depends' => ['backend\assets\AppAsset']]);
 ?>
 <form class="layui-form layui-form-pane" action="<?=Url::toRoute(['auth/save-auth'])?>" method="post">

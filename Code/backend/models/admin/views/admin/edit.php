@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Url;
-
 ?>
 <form class="layui-form layui-form-pane" action="<?=Url::toRoute(['admin/save'])?>" method="post">
     <input type="hidden" name="id" value="<?=$admin['id']?>">

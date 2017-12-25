@@ -1,17 +1,5 @@
-// 配置
-layui.config({
-    base: '/static/js/'   // 模块目录
-}).extend({                     // 模块别名
-    navAction: 'nav',
-    tabAction: 'tab',
-    listAction: 'list',
-    tableAction: 'table',
-    ajaxFormAction: 'ajaxForm',
-    dialog: 'dialog',
-});
-
 // 主入口方法
-layui.use(['layer', 'element', 'navAction', 'util'], function () {
+layui.use(['layer', 'element', 'table', 'tableAction', 'navAction', 'util'], function () {
 
     // 操作对象
     var device = layui.device(),
@@ -145,6 +133,27 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         // 当前选中的选项卡id
         return $(document).find('body .my-body .layui-tab-card > .layui-tab-title .layui-this').attr('lay-id');
     };
+
+    window.submitForm = function (url, type, data, index, dataType) {
+        $.ajax({
+            url: url,
+            type: type ? type : 'post',
+            data: data ? data : {},
+            dataType: dataType ? dataType : 'json',
+            success: function (result) {
+                if (result.code == 0) {
+                    layer.close(index);
+                    layer.msg(result.err, {icon: 1, shade: 0.4, time: 1000});
+                    location.reload();
+                } else {
+                    layer.msg(result.err, {icon: 2, shade: 0.4, time: 1000});
+                }
+            }, error: function (error) {
+                alert(333);return false;
+                layer.alert(error.responseText, {icon: 2, title: '提示'});
+            }
+        });
+    },
 
     // 双击关闭相应选项卡
     $(document).on('dblclick', '.my-body .layui-tab-card > .layui-tab-title li', function () {
@@ -291,6 +300,7 @@ layui.use(['layer', 'element', 'navAction', 'util'], function () {
         // 设置高度
         $(document).find(".layui-tab[lay-filter='card'] div.layui-tab-content").height(height - 2);
     }
+
 
     // 初始化
     init();

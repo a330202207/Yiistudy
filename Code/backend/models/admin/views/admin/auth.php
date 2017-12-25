@@ -1,7 +1,5 @@
 <?php
 use yii\helpers\Url;
-\backend\assets\AppAsset::register($this);
-$this->registerJsFile('@web/static/admin/auth.js', ['depends' => ['backend\assets\AppAsset']]);
 ?>
 <form class="layui-form layui-form-pane" action="<?=Url::toRoute(['admin/auth-admin-role'])?>" method="post">
     <input type="hidden" name="id" value="<?=$admin_id?>">
