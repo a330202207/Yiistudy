@@ -3,6 +3,7 @@ use yii\helpers\Url;
 ?>
 <form class="layui-form layui-form-pane" action="<?=Url::toRoute(['admin/save'])?>" method="post">
     <input type="hidden" name="id" value="<?=$admin['id']?>">
+    <input name="_csrf-backend" type="hidden" value="<?= Yii::$app->request->csrfToken ?>"/>
     <div class="layui-form-item">
         <label class="layui-form-label">用户名称</label>
         <div class="layui-input-inline">

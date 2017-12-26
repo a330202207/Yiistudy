@@ -6,6 +6,4 @@ layui.config({
     tabAction: 'tab',
     listAction: 'list',
     tableAction: 'table',
-    formAction: 'form',
-    testO: 'testO'
 });

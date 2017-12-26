@@ -108,8 +108,7 @@ class AdminController extends BaseController
     {
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
-            $res = $this->_model->authAdminRole($data);
-            if ($res) {
+            if ($this->_model->authAdminRole($data)) {
                 return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
             } else {
                 return $this->resAjax($this->_model->resLoginCode());
@@ -137,6 +136,7 @@ class AdminController extends BaseController
                 } else {
                     $res = $this->_model->updateAdmin($data);
                 }
+
                 if ($res) {
                     return $this->resAjax(['code' => 0, 'err' => '操作成功！']);
                 } else {

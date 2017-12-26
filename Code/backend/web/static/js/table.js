@@ -2,11 +2,7 @@ layui.define('layer', function (exports) {
 
     // 操作对象
     var layer = layui.layer,
-        // form = layui.formAction,
         $ = layui.jquery;
-    console.log(layui);
-    console.log(layui.formAction);
-    console.log(layui.navAction);
 
     // 封装方法
     var mod = {
@@ -113,24 +109,44 @@ layui.define('layer', function (exports) {
             return $(window).height() - ( $('.my-btn-box').outerHeight(true) ? $('.my-btn-box').outerHeight(true) + 35 : 40 );
         },
 
+        submitForm: function (url, type, data, index, dataType) {
+            $.ajax({
+                url: url,
+                type: type ? type : 'post',
+                data: data ? data : {},
+                dataType: dataType ? dataType : 'json',
+                success: function (result) {
+                    if (result.code == 0) {
+                        layer.msg(result.err, {icon: 1, shade: 0.4, time: 2000});
+                        layer.close(index);
+                        setTimeout(location.reload(), 5000);
+                    } else {
+                        layer.msg(result.err, {icon: 2, shade: 0.4, time: 2000});
+                    }
+                }, error: function (error) {
+                    layer.alert(error.responseText, {icon: 2, title: '提示'});
+                }
+            });
+        },
+
+
         //删除数据
         delData: function (obj, href) {
+            var _this = this;
             layer.confirm('确定要删除该条数据？', {icon: 3}, function (index) {
-                parent.submitForm(href, 'get', {id: obj.data.id}, index, 'json');
+                _this.submitForm(href, 'get', {id: obj.data.id}, index, 'json');
             });
         },
 
         //编辑数据
         editData:function (obj, href, options) {
-            console.log(testO);
+            var _this = this;
             $.get(href, {id: obj.data.id}, function (data) {
                 options.content = data;
                 options.yes = function (index, layero) {
-                    console.log(testO);
                     var url = layero.find('form').attr("action");
                     var form_data = layero.find('form').serializeArray();
-                    // parent.submitForm(url, 'post', form_data, index, 'json');
-                    testO.testForm(url, 'post', form_data, index, 'json');
+                    _this.submitForm(url, 'post', form_data, index, 'json');
                 };
                 options.btn2 = function (index) {
                     layer.close(index);

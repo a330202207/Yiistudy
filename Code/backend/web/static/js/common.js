@@ -1,12 +1,11 @@
 // 主入口方法
-layui.use(['layer', 'element', 'table', 'navAction', 'formAction', 'util'], function () {
+layui.use(['layer', 'element', 'table', 'navAction', 'util'], function () {
 
     // 操作对象
     var device = layui.device(),
         element = layui.element,
         layer = layui.layer,
         navAction = layui.navAction,
-        formAction = layui.formAction,
         util = layui.util,
         $ = layui.jquery,
         cardIdx = 0,
