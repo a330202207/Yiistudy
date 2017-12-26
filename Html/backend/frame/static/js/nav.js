@@ -1,10 +1,11 @@
-layui.define(['layer', 'element'], function (exports) {
+layui.define(['layer', 'element', 'testO'], function (exports) {
 
     // 操作对象
     var layer = layui.layer,
         element = layui.element,
+        testO = layui.testO,
         $ = layui.jquery;
-
+        console.log(testO);
     // 封装方法
     var mod = {
         // 添加 HTMl
@@ -47,7 +48,9 @@ layui.define(['layer', 'element'], function (exports) {
             // 添加HTML
             this.addHtml(addr, obj, treeStatus, data);
         },
+        test:function () {
 
+        }
 
     };
 

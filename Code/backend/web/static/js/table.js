@@ -1,10 +1,11 @@
-layui.define('layer', function (exports) {
+layui.define(['layer'], function (exports) {
 
     // 操作对象
     var layer = layui.layer,
-        formAction = layui.formAction,
+        form = layui.formAction,
         $ = layui.jquery;
-
+    console.log(layui);
+    console.log(layui.formAction);
     // 封装方法
     var mod = {
 
@@ -119,12 +120,15 @@ layui.define('layer', function (exports) {
 
         //编辑数据
         editData:function (obj, href, options) {
+            console.log(testO);
             $.get(href, {id: obj.data.id}, function (data) {
                 options.content = data;
                 options.yes = function (index, layero) {
+                    console.log(testO);
                     var url = layero.find('form').attr("action");
                     var form_data = layero.find('form').serializeArray();
-                    parent.submitForm(url, 'post', form_data, index, 'json');
+                    // parent.submitForm(url, 'post', form_data, index, 'json');
+                    testO.testForm(url, 'post', form_data, index, 'json');
                 };
                 options.btn2 = function (index) {
                     layer.close(index);

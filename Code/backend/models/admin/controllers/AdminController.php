@@ -107,7 +107,6 @@ class AdminController extends BaseController
     public function actionAuthAdminRole()
     {
         if (Yii::$app->request->isPost) {
-            return 321;die;
             $data = Yii::$app->request->post();
             $res = $this->_model->authAdminRole($data);
             if ($res) {

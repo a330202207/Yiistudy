@@ -6,7 +6,7 @@ layui.define(['layer'], function (exports) {
     // 封装方法
     var mod = {
         // 添加 HTMl
-        sumbitForm: function (url, type, data, index, dataType) {
+        submitForm: function (url, type, data, index, dataType) {
             $.ajax({
                 url: url,
                 type: type ? type : 'post',

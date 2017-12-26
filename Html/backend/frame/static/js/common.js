@@ -5,6 +5,7 @@ layui.config({
     navAction: 'nav',
     tabAction: 'tab',
     tableAction: 'table',
+    testO: 'testO',
 });
 
 // 主入口方法

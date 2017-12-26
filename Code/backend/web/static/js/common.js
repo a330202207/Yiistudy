@@ -1,5 +1,5 @@
 // 主入口方法
-layui.use(['layer', 'element', 'table', 'tableAction', 'navAction', 'util'], function () {
+layui.use(['layer', 'element', 'table', 'navAction', 'util'], function () {
 
     // 操作对象
     var device = layui.device(),
@@ -144,12 +144,12 @@ layui.use(['layer', 'element', 'table', 'tableAction', 'navAction', 'util'], fun
                 if (result.code == 0) {
                     layer.close(index);
                     layer.msg(result.err, {icon: 1, shade: 0.4, time: 1000});
-                    location.reload();
+
+                    // location.reload();
                 } else {
                     layer.msg(result.err, {icon: 2, shade: 0.4, time: 1000});
                 }
             }, error: function (error) {
-                alert(333);return false;
                 layer.alert(error.responseText, {icon: 2, title: '提示'});
             }
         });
