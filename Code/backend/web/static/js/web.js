@@ -5,7 +5,7 @@ layui.use(['layer', 'element', 'table', 'tableAction', 'formAction'], function (
     var table = layui.table,
         tableAction = layui.tableAction,
         $ = layui.jquery;
-    console.log(layui.formAction);
+    // console.log(layui.formAction);
     //表格操作
     table.on('tool(customer)', function (obj) {
         var that = this;
