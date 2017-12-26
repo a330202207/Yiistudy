@@ -1,7 +1,7 @@
 /**
  * Created by Kevin on 2017/12/25.
  */
-layui.use(['layer', 'element', 'table', 'tableAction', 'formAction'], function () {
+layui.use(['layer', 'element', 'table', 'tableAction'], function () {
     var table = layui.table,
         tableAction = layui.tableAction,
         $ = layui.jquery;
