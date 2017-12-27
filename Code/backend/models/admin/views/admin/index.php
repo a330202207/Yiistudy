@@ -4,11 +4,8 @@ use common\helpers\FuncHelper;
 ?>
 <div class="my-btn-box">
     <span class="fl">
-        <a class="layui-btn layui-btn-danger radius btn-delect" id="btn-delete-all">批量删除</a>
-<!--        <a href-info="admin/admin/edit" dialog-type="load" class="layui-btn btn-add btn-default" w="60%" h="60%" lay-event="edit">添加管理员</a>-->
-<!--        <a class="layui-btn btn-add btn-default" dialog-type="load" href-info="--><?//=Url::toRoute(['admin/edit'])?><!--" w="60%" h="60%" lay-event="edit">添加管理员</a>-->
-        <a class="layui-btn btn-add btn-default" lay-event="add" href-info="<?=Url::toRoute(['admin/edit'])?>" w="60%" h="60%" lay-event="edit">添加管理员</a>
-        <?php // FuncHelper::BA('admin/edit','添加管理员', 'load','btn-add btn-default', '60%','60%')?>
+        <a class="layui-btn layui-btn-danger radius btn-delect" event-type="deleAll" id="btn-delete-all">批量删除</a>
+        <a class="layui-btn btn-add btn-default" event-type="add" href-info="<?=Url::toRoute(['admin/edit'])?>" w="60%" h="60%" lay-event="edit">添加管理员</a>
         <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
     </span>
 </div>
@@ -43,5 +40,5 @@ use common\helpers\FuncHelper;
 <script type="text/html" id="barOption">
     <a class="layui-btn layui-btn-mini" href-info="<?=Url::toRoute(['admin/edit-auth'])?>" lay-event="auth">授权</a>
     <a class="layui-btn layui-btn-mini layui-btn-normal" href-info="<?=Url::toRoute(['admin/edit'])?>" w="60%" h="60%" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" href-info="<?=Url::toRoute(['admin/delete'])?>" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" href-info="<?=Url::toRoute(['admin/delete'])?>" lay-event="del">删除</a>
 </script>

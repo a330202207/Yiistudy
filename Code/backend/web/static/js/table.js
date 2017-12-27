@@ -119,7 +119,8 @@ layui.define('layer', function (exports) {
                     if (result.code == 0) {
                         layer.msg(result.err, {icon: 1, shade: 0.4, time: 2000});
                         layer.close(index);
-                        setTimeout(location.reload(), 5000);
+                        location.reload();
+                        // setTimeout(location.reload(), 5000);
                     } else {
                         layer.msg(result.err, {icon: 2, shade: 0.4, time: 2000});
                     }
@@ -141,8 +142,8 @@ layui.define('layer', function (exports) {
         //编辑数据
         editData:function (obj, href, options) {
             var _this = this;
-            $.get(href, {id: obj.data.id}, function (data) {
-                options.content = data;
+            $.get(href, {id: obj.data.id}, function (res) {
+                options.content = res;
                 options.yes = function (index, layero) {
                     var url = layero.find('form').attr("action");
                     var form_data = layero.find('form').serializeArray();
@@ -158,11 +159,12 @@ layui.define('layer', function (exports) {
         //表格行内动作
         doAction: function (obj, href, options) {
             switch (obj.event) {
+                case 'add':
                 case 'auth':
                 case 'edit':
                     this.editData(obj, href, options);
                     break;
-                case 'delete':
+                case 'del':
                     this.delData(obj, href);
                     break;
             }

@@ -134,27 +134,6 @@ layui.use(['layer', 'element', 'table', 'navAction', 'util'], function () {
         return $(document).find('body .my-body .layui-tab-card > .layui-tab-title .layui-this').attr('lay-id');
     };
 
-    window.submitForm = function (url, type, data, index, dataType) {
-        $.ajax({
-            url: url,
-            type: type ? type : 'post',
-            data: data ? data : {},
-            dataType: dataType ? dataType : 'json',
-            success: function (result) {
-                if (result.code == 0) {
-                    layer.close(index);
-                    layer.msg(result.err, {icon: 1, shade: 0.4, time: 1000});
-
-                    // location.reload();
-                } else {
-                    layer.msg(result.err, {icon: 2, shade: 0.4, time: 1000});
-                }
-            }, error: function (error) {
-                layer.alert(error.responseText, {icon: 2, title: '提示'});
-            }
-        });
-    },
-
     // 双击关闭相应选项卡
     $(document).on('dblclick', '.my-body .layui-tab-card > .layui-tab-title li', function () {
         // 欢迎页面以外，删除选项卡

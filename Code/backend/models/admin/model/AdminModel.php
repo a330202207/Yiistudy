@@ -109,8 +109,6 @@ class AdminModel extends Admin
     {
         $obj = self::findOne($data['id']);
         $obj->role_id = $data['role_id'];
-        var_dump($obj);die;
-        $obj->save();
         return $obj->save();
     }
 

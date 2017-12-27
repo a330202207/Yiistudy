@@ -3,23 +3,46 @@
  */
 layui.use(['layer', 'element', 'table', 'tableAction'], function () {
     var table = layui.table,
+        element = layui.element,
         tableAction = layui.tableAction,
         $ = layui.jquery;
-    // console.log(layui.formAction);
+    var options = {
+        'type':1,
+        'shadeClose':true,
+        'maxmin':true,
+        'offset':['100px'],
+        'btn':['保存', '取消']
+    };
+
+
     //表格操作
     table.on('tool(customer)', function (obj) {
         var that = this;
         var href = $(that).attr('href-info');
-        var options = {
-            'type':1,
-            'area':[$(that).attr('w'), $(that).attr('h')],
-            'title':$(that).text(),
-            'shadeClose':true,
-            'maxmin':true,
-            'offset':['100px'],
-            'btn':['保存', '取消']
-        };
+        getOptions(that);
         tableAction.doAction(obj, href, options)
     });
+
+    $(document).on("click", "a[event-type]", function () {
+        var that = this;
+        var href = $(that).attr('href-info');
+        // var type = $(this).attr('lay-event');
+        var obj = {'event':$(this).attr('lay-event'), data:{id:''}};
+        getOptions(that);
+        tableAction.doAction(obj, href, options)
+    });
+
+    // 刷新
+    $('#btn-refresh').on('click', function () {
+        location.reload();
+    });
+
+    //获取弹窗参数
+    function getOptions(obj) {
+        var width = $(obj).attr('w');
+        var height = $(obj).attr('w');
+        options.area = [width, height];
+        options.title = $(obj).text();
+    }
 
 });
