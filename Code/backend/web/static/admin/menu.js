@@ -1,6 +1,8 @@
-layui.use('layer', function () {
-    var $ = layui.jquery, layer = layui.layer;
-    $('.j-change-icon').on('click', function () {
+layui.use(['layer', 'tableAction'], function () {
+    var $ = layui.jquery,
+        tableAction = layui.tableAction;
+
+/*    $('.j-change-icon').on('click', function () {
         var changeId = $(this).parent().prev().attr('id');
 
         var index = layer.open({
@@ -12,5 +14,16 @@ layui.use('layer', function () {
             maxmin: true, //开启最大化最小化按钮
             // content:"{:U('icon')}"+"&id="+changeId
         });
+    });*/
+
+    $(document).on("click", "a[menu-type]", function () {
+        var that = this;
+        var href = $(that).attr('href-info');
+        var obj = {'event':$(this).attr('menu-type'), data:{id:''}};
+        tableAction.doAction(obj, href);
     });
+    
+    function delRow(action_num) {
+        $("#menu_action_" + action_num).remove();
+    }
 });

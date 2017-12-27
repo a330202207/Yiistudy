@@ -4,6 +4,8 @@ layui.define('layer', function (exports) {
     var layer = layui.layer,
         $ = layui.jquery;
 
+    var action_num = 0;
+
     // 封装方法
     var mod = {
 
@@ -155,7 +157,28 @@ layui.define('layer', function (exports) {
                 layer.open(options);
             }, 'html');
         },
-
+        update:function (href) {
+            var data = $("#data").find('form').serializeArray();
+            this.submitForm(href, 'post', data, '', 'json');
+        },
+        addRow:function () {
+            action_num++;
+            var html =
+                '<tr id="menu_action_' + action_num + '">' +
+                '<td><input type="text" name="new[' + action_num + '][menu_name]" value=""  class="layui-input"/></td>' +
+                '<td><input type="text" name="new[' + action_num + '][action]" value="" class="layui-input"/></td>' +
+                '<td><input type="text" name="new[' + action_num + '][sort]" value="100" class="layui-input"/></td>' +
+                '<td>' +
+                '<input type="checkbox" name="new[' + action_num + '][is_show]" value="1" title="是">' +
+                '<div class="layui-unselect layui-form-checkbox" lay-skin=""><span>是</span><i class="layui-icon"></i></div>' +
+                '</td>' +
+                '<td><a class="layui-btn layui-btn-mini layui-btn-danger" onclick="delRow(action_num)" href-info="">删除</a></td> ' +
+                '</tr>';
+            $("#action_list").append(html);
+        },
+        delRow:function (action_num) {
+            $("#menu_action_" + action_num).remove();
+        },
         //表格行内动作
         doAction: function (obj, href, options) {
             switch (obj.event) {
@@ -166,6 +189,12 @@ layui.define('layer', function (exports) {
                     break;
                 case 'del':
                     this.delData(obj, href);
+                    break;
+                case 'add-rows':
+                    this.addRow();
+                    break;
+                case 'update':
+                    this.update(href);
                     break;
             }
         },

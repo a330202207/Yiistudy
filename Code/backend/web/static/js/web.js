@@ -26,9 +26,9 @@ layui.use(['layer', 'element', 'table', 'tableAction'], function () {
     $(document).on("click", "a[event-type]", function () {
         var that = this;
         var href = $(that).attr('href-info');
-        // var type = $(this).attr('lay-event');
-        var obj = {'event':$(this).attr('lay-event'), data:{id:''}};
+        var obj = {'event':$(this).attr('event-type'), data:{id:''}};
         getOptions(that);
+        console.log(obj);
         tableAction.doAction(obj, href, options)
     });
 

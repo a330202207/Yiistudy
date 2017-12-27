@@ -62,8 +62,8 @@ class MenuController extends BaseController
         if (Yii::$app->request->isAjax) {
             $menuId = Yii::$app->request->get('menu_id');
             $parentId = Yii::$app->request->get('parent_id', 0);
-            $data = $this->_model->findMenuOne($menuId);
-            return $this->renderPartial('edit', [
+            $data = $this->_model->getMenuOne($menuId);
+            return $this->render('edit', [
                 'menu' => $data,
                 'parent_id' => $parentId
             ]);
@@ -110,7 +110,7 @@ class MenuController extends BaseController
     {
         $parentId = Yii::$app->request->get('parent_id');
         $data = $this->_model->getAllAction($parentId);
-        return $this->renderPartial('action', [
+        return $this->render('action', [
             'data' => $data,
             'parent_id' => $parentId
         ]);

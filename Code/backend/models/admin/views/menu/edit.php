@@ -8,6 +8,7 @@ use yii\helpers\Url;
             <input type="hidden" name="parent_id" value="<?//$menu['parent_id'] ? $menu['parent_id']: 0;?>">
             <input type="hidden" name="parent_id" value="<?=$parent_id?>">
             <input type="hidden" name="menu_id" value="<?=$menu['menu_id']?>">
+            <input name="_csrf-backend" type="hidden" value="<?= Yii::$app->request->csrfToken ?>"/>
             <input type="text" name="menu_name" lay-verify="required" value="<?=$menu['menu_name']?>" placeholder="请输入" autocomplete="off" class="layui-input">
         </div>
     </div>

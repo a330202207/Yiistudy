@@ -4,7 +4,6 @@ use common\helpers\FuncHelper;
 ?>
 <div class="my-btn-box">
     <span class="fl">
-        <a class="layui-btn layui-btn-danger radius btn-delect" event-type="deleAll" id="btn-delete-all">批量删除</a>
         <a class="layui-btn btn-add btn-default" event-type="add" href-info="<?=Url::toRoute(['admin/edit'])?>" w="60%" h="60%" lay-event="edit">添加管理员</a>
         <a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>
     </span>
