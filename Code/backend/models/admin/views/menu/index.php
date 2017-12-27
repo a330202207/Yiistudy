@@ -23,6 +23,7 @@ use yii\helpers\Url;
         </thead>
         <tbody>
             <form>
+                <input name="_csrf-backend" type="hidden" value="<?= Yii::$app->request->csrfToken ?>"/>
                 <?php foreach($menu as $vo):?>
                     <tr>
                         <td><?=$vo['menu_name']?></td>

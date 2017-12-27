@@ -28,7 +28,6 @@ layui.use(['layer', 'element', 'table', 'tableAction'], function () {
         var href = $(that).attr('href-info');
         var obj = {'event':$(this).attr('event-type'), data:{id:''}};
         getOptions(that);
-        console.log(obj);
         tableAction.doAction(obj, href, options)
     });
 
@@ -40,7 +39,7 @@ layui.use(['layer', 'element', 'table', 'tableAction'], function () {
     //获取弹窗参数
     function getOptions(obj) {
         var width = $(obj).attr('w');
-        var height = $(obj).attr('w');
+        var height = $(obj).attr('h');
         options.area = [width, height];
         options.title = $(obj).text();
     }
