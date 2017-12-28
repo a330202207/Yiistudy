@@ -63,7 +63,7 @@ class MenuController extends BaseController
             $menuId = Yii::$app->request->get('menu_id');
             $parentId = Yii::$app->request->get('parent_id', 0);
             $data = $this->_model->getMenuOne($menuId);
-            return $this->render('edit', [
+            return $this->renderPartial('edit', [
                 'menu' => $data,
                 'parent_id' => $parentId
             ]);
