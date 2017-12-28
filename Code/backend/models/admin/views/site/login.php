@@ -5,8 +5,6 @@
 
 use yii\helpers\Url;
 use yii\captcha\Captcha;
-\backend\assets\AppAsset::register($this);
-$this->registerJsFile('@web/static/admin/login.js', ['depends' => ['backend\assets\AppAsset']]);
 ?>
 <div class="login-box">
     <form class="layui-form layui-form-pane" method="post" action="<?= Url::toRoute('menu/login')?>">

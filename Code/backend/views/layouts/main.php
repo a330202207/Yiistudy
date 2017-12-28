@@ -1,12 +1,9 @@
 <?php
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use backend\components\NavWidget;
-use backend\components\HeaderWidget;
-use backend\components\FooterWidget;
-
 AppAsset::register($this);
+$this->registerJsFile('@web/static/admin/login.js', ['depends' => ['backend\assets\AppAsset']]);
+$this->registerCssFile('@web/static/css/style.css', ['depends' => ['backend\assets\AppAsset']]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
