@@ -17,7 +17,7 @@ $params = \common\helpers\ArrayHelper::merge(
     require(__DIR__ . '/error-code.php'),       //接口错误代码对应的多语言
     require(__DIR__ . '/params.php'),           //基础配置
     require(__DIR__ . '/../../'.APP_NAME.'-'. DOMAIN_SUFFIX .'/config/params.php'),     //子站基础配置
-    require(__DIR__ . '/js-lang-keys.php'),     //子站js使用的多语言key
+    require(__DIR__ . '/js-lang-keys.php'),     //js使用的多语言key
     $jsLangKeys,                                //子站js使用的多语言key
     require(__DIR__ . '/meta.php'),             //公共meta信息的code
     $meta                                       //子站公共meta信息的code
@@ -28,20 +28,20 @@ $urlRules = require_once(__DIR__ . '/url-rules.php');   //加载页面路由地�
 $redis = require_once(__DIR__ . '/redis.php');          //加载redis配置
 
 return [
-    'id' => APP_NAME . '-'. DOMAIN_SUFFIX,
-    'bootstrap' => ['log','mysession'],           //日志
-    'basePath' => '@app',                         //当前应用根目录的绝对物理路径
-    'controllerNamespace' => 'app\controllers',
-    'controllerRule' => [//按顺序查找controller
+    'id' => APP_NAME . '-'. DOMAIN_SUFFIX,          //当前站点的名称
+    'bootstrap' => ['log','mysession'],             //在bootstrap阶段响应时，启动log和mysession
+    'basePath' => '@app',                           //当前应用根目录的绝对物理路径
+    'controllerNamespace' => 'app\controllers',     //站点下(非module中)controller的命名空间
+    'controllerRule' => [                           //按顺序查找controller
         'app\controllers',
         'common\\controllers'
     ],
 //    'defaultRoute' => 'default',
     'vendorPath' => dirname(dirname(dirname(__DIR__))) . '/vendor',
     'viewPath' =>  '@common/views',
-    'runtimePath' => SYS_RUNTIME_PATH,
+    'runtimePath' => SYS_RUNTIME_PATH,              //缓存目录
     'components' => [
-        'view' => [//视图重写寻找路径组件(兼容老站版本)
+        'view' => [                                 //视图重写寻找路径组件(兼容老站版本)
             'class' => 'common\components\BaseView',
             'theme' =>[
                 'pathMap' => [
@@ -50,18 +50,18 @@ return [
                 'baseUrl' => '@app/views',
             ],
         ],
-        'cache' => [//默认使用文件缓存
-            'class' => 'yii\caching\FileCache',
+        'cache' => [                                //默认使用文件缓存
+            'class' => 'yii\caching\FileCache',     //使用标准文件存储缓存数据
             'serializer' => ['igbinary_serialize', 'igbinary_unserialize'],//序列化|反序列化 函数 必须开启php_igbinary扩展
-            'cachePath' => '@runtime/cache/', //文件缓存目录
+            'cachePath' => '@runtime/cache/',       //文件缓存目录
         ],
-        'mysession' => [    //改名:在bootstrap启动时，默认名session将启动yii自带的session类
+        'mysession' => [                            //改名:在bootstrap响应时，默认名session将启动yii自带的session类
             'class' => 'common\components\Session'
         ],
-        'redis' => $redis[YII_ENV],
-        'i18n' => [//翻译组件
+        'redis' => $redis[YII_ENV],                 //redis配置
+        'i18n' => [                                 //翻译组件
             'translations' => [
-                'app*' => [//app类型的翻译
+                'app*' => [                         //app类型的翻译
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'sourceLanguage' => 'en',
@@ -69,7 +69,7 @@ return [
                         'app' => APP_NAME.'.php',
                     ],
                 ],
-                'common*' => [//common类型的翻译
+                'common*' => [                      //common类型的翻译
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'sourceLanguage' => 'en',
