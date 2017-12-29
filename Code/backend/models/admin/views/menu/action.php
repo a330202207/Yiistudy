@@ -29,7 +29,9 @@ $this->registerJsFile('@web/static/admin/menu.js', ['depends' => ['backend\asset
                 <td><input type="text" name="data[<?= $value['menu_id'] ?>][menu_name]" class="layui-input" value="<?= $value['menu_name'] ?>" /></td>
                 <td><input type="text" name="data[<?= $value['menu_id'] ?>][action]" class="layui-input" value="<?= $value['action'] ?>" /></td>
                 <td><input type="number" name="data[<?= $value['menu_id'] ?>][sort]" class="layui-input" value="<?= $value['sort'] ?>" /></td>
-                <td><input type="checkbox" name="data[<?= $value['menu_id'] ?>][is_show]" value="1" title="是"></td>
+                <td>
+                    <input type="radio">
+                </td>
                 <td><a class="layui-btn layui-btn-mini layui-btn-danger" menu-type="del" href-info="<?= Url::toRoute(['menu/delete', 'menu_id' => $value['menu_id']]) ?>">删除</a></td>
             </tr>
         <?php endforeach; ?>

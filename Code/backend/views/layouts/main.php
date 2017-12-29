@@ -1,9 +1,5 @@
 <?php
-use backend\assets\AppAsset;
 use yii\helpers\Html;
-AppAsset::register($this);
-$this->registerJsFile('@web/static/admin/login.js', ['depends' => ['backend\assets\AppAsset']]);
-$this->registerCssFile('@web/static/css/style.css', ['depends' => ['backend\assets\AppAsset']]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

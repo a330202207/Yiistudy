@@ -110,7 +110,7 @@ class MenuController extends BaseController
     {
         $parentId = Yii::$app->request->get('parent_id');
         $data = $this->_model->getAllAction($parentId);
-        return $this->renderPartial('action', [
+        return $this->render('action', [
             'data' => $data,
             'parent_id' => $parentId
         ]);

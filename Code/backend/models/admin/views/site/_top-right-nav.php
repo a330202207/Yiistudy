@@ -3,7 +3,6 @@
     <li class="layui-nav-item">
         <a class="name" href="javascript:;"><img src="/static/image/code.png" alt="logo"> Admin </a>
         <dl class="layui-nav-child">
-            <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>登出</a></dd>
             <dd><a href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
         </dl>
     </li>
