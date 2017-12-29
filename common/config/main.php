@@ -37,7 +37,7 @@ return [
         'common\\controllers'
     ],
 //    'defaultRoute' => 'default',
-    'vendorPath' => dirname(dirname(dirname(__DIR__))) . '/vendor',
+    'vendorPath' => dirname(dirname(dirname(__DIR__))) . '/vendor',     //框架路径地址
     'viewPath' =>  '@common/views',
     'runtimePath' => SYS_RUNTIME_PATH,              //缓存目录
     'components' => [
@@ -80,16 +80,16 @@ return [
             ],
         ],
         'request' => [
-            'class' => 'common\components\Request',
-            'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-                'text/json' => 'yii\web\JsonParser',
+            'class' => 'common\components\Request',             //更改Request的Url
+            'parsers' => [                                      //保存内容解析器Content Type
+                'application/json' => 'yii\web\JsonParser',     //application/json类型解析器指定
+                'text/json' => 'yii\web\JsonParser',            //text/json类型解析器指定
             ],
         ],
         'model' => [
             'class' => 'common\components\GetModel'
         ],
-        'http'  => [
+        'http'  => [                                            //AppCurl交互类
             'class'=>'common\components\AppCurl',
             'hosts' => [
 //                'base'      => '192.168.221.76',
@@ -108,16 +108,16 @@ return [
             ]
         ],
         'urlManager' => [
-            'class' => 'common\components\UrlManager',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'class' => 'common\components\UrlManager',      //重写url类
+            'enablePrettyUrl' => true,                      //对url进行美化
+            'showScriptName' => false,                      //隐藏index.php
             'ruleConfig' => [
-                'class'=> 'common\components\UrlRule' //路由规则类
+                'class'=> 'common\components\UrlRule'       //重写url规则
             ],
-            'rules' => $urlRules,
+            'rules' => $urlRules,                           //匹配规则
         ],
         'log' => [              //日志系统
-            'targets' => [      //使用文件存储日志
+            'targets' => [      //使用文件存储日志(Target为日志基类)
                 'file' => [
                     'class' => 'common\components\AppFileTarget',   //文件方式存储日志操作对应操作对象
                     /*
@@ -130,39 +130,39 @@ return [
                     'levels' => ['error', 'warning'],
                     // 'categories' => ['yii\*'],
                 ],
-                'email' => [
+                'email' => [                                    //日志发送email
                     'class' => 'yii\log\EmailTarget',
-                    'levels' => ['error'],
-                    'categories' => ['curl_prod','curl_uat'], //curl 错误只针对uat和prod发邮件
-                    'message' => [
-                        'from' => ['3178586547@qq.com'],
-                        'to' => ['2885542036@qq.com','2853718638@qq.com'],
-                        'subject' => $_SERVER['HTTP_HOST'] . ':curl error',
+                    'levels' => ['error'],                      //日志错误级别
+                    'categories' => ['curl_prod','curl_uat'],   //curl 错误只针对uat和prod发邮件
+                    'message' => [                              //发送的邮件信息配置
+                        'from' => ['3178586547@qq.com'],                    //发件人
+                        'to' => ['2885542036@qq.com','2853718638@qq.com'],  //收件人
+                        'subject' => $_SERVER['HTTP_HOST'] . ':curl error', //发送主题:接口错误
                     ],
                 ],
             ],
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' =>false,//false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
+            'useFileTransport' =>false,     //false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.qq.com',
+                'host' => 'smtp.qq.com',            //QQ代理
                 'username' => '3178586547@qq.com',
                 'password' => 'xtpvgxiecpfndccb',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
-            'messageConfig'=>[
+            'messageConfig'=>[              //发送的邮件信息配置
                 'charset'=>'UTF-8',
                 'from' => ['3178586547@qq.com' => 'admin']
             ],
         ],
-        'errorHandler' => [
+        'errorHandler' => [                 //重写自定义错误
             'class' => 'common\components\ErrorHandler',
             'errorAction' => 'default/error',
         ],
-        'assetManager' => $asset,
+        'assetManager' => $asset,           //资源加载
     ],
 
     'params' => $params,
