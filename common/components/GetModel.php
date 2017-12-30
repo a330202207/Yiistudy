@@ -22,7 +22,7 @@ namespace common\components;
  * @property \common\models\SearchModel $search
  * @property \common\models\SeoModel $seo
  * @property \common\models\ThirdloginModel $thirdlogin
- *  @property \common\models\UserOrderModel $userOrder
+ * @property \common\models\UserOrderModel $userOrder
  * @property \common\models\StyleGalleryModel $styleGallery
  * @property \common\models\ActivityModel $activity
  * @property \common\models\CurrencyModel $currency
@@ -38,12 +38,11 @@ class GetModel
      * @return \common\components\BaseModel
      * @throws \yii\base\InvalidConfigException
      */
-    public function __get( $name )
+    public function __get($name)
     {
         $name = ucfirst($name);
-        if(class_exists('common\models\\'.$name.'Model'))
-        {
-            return \Yii::createObject('common\models\\'.$name.'Model');
+        if (class_exists('common\models\\' . $name . 'Model')) {
+            return \Yii::createObject('common\models\\' . $name . 'Model');
         }
         return false;
     }

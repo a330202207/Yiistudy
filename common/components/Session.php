@@ -27,10 +27,9 @@ class Session extends Object
     public function start()
     {
         $sessionId = TTHelp::getCookie(Yii::$app->params['cookies']['userid']);
-        if (!$sessionId)
-        {
+        if (!$sessionId) {
             $sessionId = self::createUniqueId();
-            TTHelp::setCookie(Yii::$app->params['cookies']['userid'],$sessionId,3600 * 24 * 365);
+            TTHelp::setCookie(Yii::$app->params['cookies']['userid'], $sessionId, 3600 * 24 * 365);
         }
         $this->sessionId = $sessionId;
     }
@@ -52,13 +51,12 @@ class Session extends Object
      * @param $value
      * @param $expire
      */
-    public function set($name,$value,$expire=3600)
+    public function set($name, $value, $expire = 3600)
     {
-        if (!$this->sessionId)
-        {
+        if (!$this->sessionId) {
             $this->start();
         }
-        Yii::$app->redis->set($this->_createRedisKey($name), $value,$expire);
+        Yii::$app->redis->set($this->_createRedisKey($name), $value, $expire);
     }
 
     /**
@@ -68,8 +66,7 @@ class Session extends Object
      */
     public function get($name)
     {
-        if (!$this->sessionId)
-        {
+        if (!$this->sessionId) {
             $this->start();
         }
         $value = Yii::$app->redis->get($this->_createRedisKey($name));
@@ -83,8 +80,7 @@ class Session extends Object
      */
     public function delete($name)
     {
-        if (!$this->sessionId)
-        {
+        if (!$this->sessionId) {
             return false;
         }
         $value = Yii::$app->redis->delete($this->_createRedisKey($name));

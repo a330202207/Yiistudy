@@ -20,9 +20,8 @@ class Redis extends Object
     public function init()
     {
         parent::init();
-        if ($this->redis === null)
-        {
-            $this->redis = new \RedisCluster(null,$this->hosts);
+        if ($this->redis === null) {
+            $this->redis = new \RedisCluster(null, $this->hosts);
         }
     }
 
@@ -31,8 +30,8 @@ class Redis extends Object
      * @auto zouah
      * @date 2017-04-17
      */
-    public function __call($name,$args)
+    public function __call($name, $args)
     {
-        return call_user_func_array([$this->redis,$name],$args);
+        return call_user_func_array([$this->redis, $name], $args);
     }
 }

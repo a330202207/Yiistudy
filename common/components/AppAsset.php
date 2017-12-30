@@ -1,5 +1,6 @@
 <?php
 namespace common\components;
+
 use Yii;
 use yii\web\AssetBundle;
 
@@ -26,14 +27,13 @@ class AppAsset extends AssetBundle
      *                      'js' => ['js/jquery-1.9.1.min.js'],
      *                      ],
      *                  ],
-     *              ], 
+     *              ],
      * @return static the registered asset bundle instance
      */
     public static function register($view, $name = '')
     {
         return $view->registerAssetBundle($name ? $name : get_called_class());
     }
-
 
 
 }

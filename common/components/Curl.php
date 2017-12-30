@@ -54,8 +54,8 @@ class Curl extends Object
         $this->_response = null;
         $this->_responseCode = null;
         $this->_defaultOptions = array(
-            CURLOPT_USERAGENT      => 'TOMTOP-Curl-Agent',
-            CURLOPT_TIMEOUT        => 3,
+            CURLOPT_USERAGENT => 'TOMTOP-Curl-Agent',
+            CURLOPT_TIMEOUT => 3,
             CURLOPT_CONNECTTIMEOUT => 3,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
@@ -64,17 +64,16 @@ class Curl extends Object
     }
 
 
-
     /**
      * 添加默认参数
      *
-     * @param array  $params
+     * @param array $params
      *
      * @return array $params
      */
     protected function _setDefParams($params)
     {
-        array_key_exists('lang', $params) && !is_numeric($params['lang']) && $params['lang'] = TTHelp::getConfigByKey($params['lang'],'langIds');
+        array_key_exists('lang', $params) && !is_numeric($params['lang']) && $params['lang'] = TTHelp::getConfigByKey($params['lang'], 'langIds');
         return array_merge(TTHelp::getDefParams(), $params);
     }
 
@@ -84,17 +83,13 @@ class Curl extends Object
      */
     public function getParams()
     {
-        if(in_array(strtoupper($this->_method),['GET','DELETE']))
-        {
-            $tmp = explode('&',$this->_data);
-            foreach($tmp as $k => $v)
-            {
-                list($key,$value) = explode('=',$v);
+        if (in_array(strtoupper($this->_method), ['GET', 'DELETE'])) {
+            $tmp = explode('&', $this->_data);
+            foreach ($tmp as $k => $v) {
+                list($key, $value) = explode('=', $v);
                 $params[$key] = $value;
             }
-        }
-        else
-        {
+        } else {
             $params = $this->_data;
         }
         return $params;
@@ -110,7 +105,7 @@ class Curl extends Object
     {
         //设置值
         $this->_ip = $ip;
-        $this->_ip = strstr(':',$ip) ? $this->_ip : $this->_ip . ':80';
+        $this->_ip = strstr(':', $ip) ? $this->_ip : $this->_ip . ':80';
         $this->setOption(CURLOPT_PROXY, $this->_ip);
 
         //返回本身
@@ -127,21 +122,17 @@ class Curl extends Object
      **/
     protected function _setDefIp()
     {
-        if(in_array(YII_ENV,['dev','test']) && empty($this->_ip) && !empty(current($this->hosts)))
-        {
+        if (in_array(YII_ENV, ['dev', 'test']) && empty($this->_ip) && !empty(current($this->hosts))) {
             $apiUrlArr = parse_url($this->_url);
-            $apiUrl = $apiUrlArr['scheme'] .'://'. $apiUrlArr['host'];
-            $apiHostKey = array_search($apiUrl,Yii::$app->params['hosts']);
-            if(empty($apiHostKey))
-            {
+            $apiUrl = $apiUrlArr['scheme'] . '://' . $apiUrlArr['host'];
+            $apiHostKey = array_search($apiUrl, Yii::$app->params['hosts']);
+            if (empty($apiHostKey)) {
                 return false;
             }
-            if(array_key_exists($apiHostKey,$this->hosts))
-            {
+            if (array_key_exists($apiHostKey, $this->hosts)) {
                 return $this->setIp($this->hosts[$apiHostKey]);
             }
-            if(array_key_exists('all',$this->hosts))
-            {
+            if (array_key_exists('all', $this->hosts)) {
                 return $this->setIp($this->hosts['all']);
             }
             return false;
@@ -155,8 +146,7 @@ class Curl extends Object
      */
     public function resolveApi($params)
     {
-        if(!is_array($params))
-        {
+        if (!is_array($params)) {
             $tmp = $params;
             $params = [];
             $params['api'] = $tmp;
@@ -165,16 +155,13 @@ class Curl extends Object
         $this->_api = $params['api'];
 
         //替换
-        if (isset($params['params']) && is_array($params['params']))
-        {
-            foreach ($params['params'] as $key =>$val )
-            {
-                $url = str_replace('{'.$key.'}',$val,$url);
+        if (isset($params['params']) && is_array($params['params'])) {
+            foreach ($params['params'] as $key => $val) {
+                $url = str_replace('{' . $key . '}', $val, $url);
             }
         }
         //拼接到url
-        if (isset($params['urlParams']) && is_array($params['urlParams']))
-        {
+        if (isset($params['urlParams']) && is_array($params['urlParams'])) {
             $params['urlParams'] = http_build_query($params['urlParams']);
             $url .= '?' . $params['urlParams'];
         }
@@ -193,10 +180,8 @@ class Curl extends Object
      */
     public function setHeader($arr)
     {
-        if (isset($arr) && is_array($arr))
-        {
-            foreach ($arr as $key =>$val)
-            {
+        if (isset($arr) && is_array($arr)) {
+            foreach ($arr as $key => $val) {
                 $this->_header[] = $key . ":" . $val;
             }
         }
@@ -210,13 +195,11 @@ class Curl extends Object
     public function getHeader()
     {
         $arr = [];
-        if(empty($this->_header))
-        {
+        if (empty($this->_header)) {
             return false;
         }
-        foreach($this->_header as $v)
-        {
-            list($key,$value) = explode(':',$v);
+        foreach ($this->_header as $v) {
+            list($key, $value) = explode(':', $v);
             $arr[$key] = $value;
         }
         return $arr;
@@ -226,19 +209,18 @@ class Curl extends Object
     /**
      * Start performing GET-HTTP-Request
      *
-     * @param string | array  $api
-     * @param array  $data
+     * @param string | array $api
+     * @param array $data
      *
      * @return static
      */
-    public function get($api,$data=[])
+    public function get($api, $data = [])
     {
         $this->reset();
         $url = $this->resolveApi($api);
         $data = $this->_setDefParams($data);
 
-        if (is_array($data)&&!empty($data))
-        {
+        if (is_array($data) && !empty($data)) {
             $data = http_build_query($data);
             $url .= '?' . $data;
         }
@@ -249,16 +231,15 @@ class Curl extends Object
     }
 
 
-
     /**
      * Start performing POST-HTTP-Request
      *
-     * @param string  $api
-     * @param array  $data
+     * @param string $api
+     * @param array $data
      *
      * @return static
      */
-    public function post($api,$data=array())
+    public function post($api, $data = array())
     {
         $this->reset();
         $url = $this->resolveApi($api);
@@ -266,16 +247,16 @@ class Curl extends Object
         $this->_url = $url;
         $data = $this->_setDefParams($data);
         $this->_data = $data;
-        $this->setOption(CURLOPT_POST,true);
-        $this->setOption(CURLOPT_POSTFIELDS,$this->_data);
+        $this->setOption(CURLOPT_POST, true);
+        $this->setOption(CURLOPT_POSTFIELDS, $this->_data);
         return $this;
     }
 
     /**
      * Start performing POST-HTTP-Request
      *
-     * @param string  $api
-     * @param array  $data
+     * @param string $api
+     * @param array $data
      *
      * @return static
      */
@@ -292,8 +273,8 @@ class Curl extends Object
         $this->_method = 'POST';
         $this->_url = $url;
         $this->_data = $data;
-        $this->setOption(CURLOPT_POST,true);
-        $this->setOption(CURLOPT_POSTFIELDS,$this->_data);
+        $this->setOption(CURLOPT_POST, true);
+        $this->setOption(CURLOPT_POSTFIELDS, $this->_data);
         return $this;
     }
 
@@ -301,12 +282,12 @@ class Curl extends Object
     /**
      * Start performing PUT-HTTP-Request
      *
-     * @param string  $api
-     * @param array  $data
+     * @param string $api
+     * @param array $data
      *
      * @return static
      */
-    public function put($api,$data=array())
+    public function put($api, $data = array())
     {
         $this->reset();
         $url = $this->resolveApi($api);
@@ -319,8 +300,8 @@ class Curl extends Object
         $this->_method = 'PUT';
         $this->_url = $url;
         $this->_data = $data;
-        $this->setOption(CURLOPT_POST,true);
-        $this->setOption(CURLOPT_POSTFIELDS,$this->_data);
+        $this->setOption(CURLOPT_POST, true);
+        $this->setOption(CURLOPT_POSTFIELDS, $this->_data);
         return $this;
     }
 
@@ -329,18 +310,17 @@ class Curl extends Object
      *
      * @author zouah
      * @date 2017-03-30
-     * @param string  $api
-     * @param array  $data
+     * @param string $api
+     * @param array $data
      *
      * @return static
      */
-    public function delete($api,$data=array())
+    public function delete($api, $data = array())
     {
         $this->reset();
         $url = $this->resolveApi($api);
         $data = $this->_setDefParams($data);
-        if (is_array($data)&&!empty($data))
-        {
+        if (is_array($data) && !empty($data)) {
             $data = http_build_query($data);
             $url .= '?' . $data;
         }
@@ -355,7 +335,7 @@ class Curl extends Object
      * Set curl option
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return static
      */
@@ -416,9 +396,8 @@ class Curl extends Object
         //设置默认ip
         $this->_setDefIp();
 
-        if(!empty($this->_header))
-        {
-            $this->setOption(CURLOPT_HTTPHEADER,$this->_header);
+        if (!empty($this->_header)) {
+            $this->setOption(CURLOPT_HTTPHEADER, $this->_header);
         }
 
         //check if method is head and set no body
@@ -436,30 +415,29 @@ class Curl extends Object
         $this->_response = $body;
 //        Yii::error('curl request failed ','curl');
         //check if curl was successful
-        if (!in_array($this->_responseCode,[200,201]) || $body === false) {
+        if (!in_array($this->_responseCode, [200, 201]) || $body === false) {
             $errorInfo = [
-                'curl_error'        => curl_error($curl),
-                'curl_errno'        => curl_errno($curl),
-                'currUrl'           => $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
-                'userIp'            => TTHelp::getClientIp(),
-                'methed'            => $this->_method,
-                'api'               => $this->_api,
-                'curl_ip'           => $this->_ip,
-                'url'               => $this->_url,
-                'params'            => $this->_data,
-                'options'           => $this->_options,
-                'defaultOptions'    => $this->_defaultOptions,
-                'code'              => $this->_responseCode,
-                'response'          => $this->_response
+                'curl_error' => curl_error($curl),
+                'curl_errno' => curl_errno($curl),
+                'currUrl' => $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+                'userIp' => TTHelp::getClientIp(),
+                'methed' => $this->_method,
+                'api' => $this->_api,
+                'curl_ip' => $this->_ip,
+                'url' => $this->_url,
+                'params' => $this->_data,
+                'options' => $this->_options,
+                'defaultOptions' => $this->_defaultOptions,
+                'code' => $this->_responseCode,
+                'response' => $this->_response
             ];
             //同一接口api在5分钟之内只报错一次
             $redisKey = Yii::$app->params['redisKey']['curlError'] . $this->_api;
             $redisTime = Yii::$app->params['time']['curlErrorCache'];
-            if(empty(Yii::$app->redis->get($redisKey)))
-            {
+            if (empty(Yii::$app->redis->get($redisKey))) {
                 //测试和开发环境就不需要发邮件了,对error的categories做一个标识
-                Yii::error("curl request failed :" . VarDumper::dumpAsString($errorInfo) ,'curl_'.YII_ENV);
-                Yii::$app->redis->set($redisKey,$this->_api,$redisTime);
+                Yii::error("curl request failed :" . VarDumper::dumpAsString($errorInfo), 'curl_' . YII_ENV);
+                Yii::$app->redis->set($redisKey, $this->_api, $redisTime);
             }
         }
 

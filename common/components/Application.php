@@ -12,6 +12,7 @@
  */
 
 namespace common\components;
+
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -56,9 +57,8 @@ class Application extends \yii\web\Application
         $className = str_replace(' ', '', ucwords(str_replace('-', ' ', $className))) . 'Controller';
 
         //规则重写
-        $className = $this->findController(Yii::$app->controllerRule,$className,$prefix,0);
-        if(empty($className))
-        {
+        $className = $this->findController(Yii::$app->controllerRule, $className, $prefix, 0);
+        if (empty($className)) {
             return null;
         }
         //end 规则重写
@@ -81,19 +81,15 @@ class Application extends \yii\web\Application
      * @param $level int
      * @return string $className
      */
-    public function findController($routeArr,$className,$prefix,$level)
+    public function findController($routeArr, $className, $prefix, $level)
     {
-        if($level >= count($routeArr))
-        {
+        if ($level >= count($routeArr)) {
             return false;
         }
-        $newClassName = ltrim($routeArr[$level] . '\\' . str_replace('/', '\\', $prefix)  . $className, '\\');
-        if (strpos($newClassName, '-') !== false || !class_exists($newClassName))
-        {
-            return $this->findController($routeArr,$className,$prefix,++$level);
-        }
-        else
-        {
+        $newClassName = ltrim($routeArr[$level] . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
+        if (strpos($newClassName, '-') !== false || !class_exists($newClassName)) {
+            return $this->findController($routeArr, $className, $prefix, ++$level);
+        } else {
             return $newClassName;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace common\env;
 
-use common\components\Application;
+use common\components\Application;  //重写Application类
 
 date_default_timezone_set("UTC");//设置时区
 
@@ -68,6 +68,6 @@ require(__DIR__ . '/../../' . APP_NAME . '-' . DOMAIN_SUFFIX . '/config/bootstra
 
 //加载公共main.php
 $config = require(__DIR__ . '/../../common/config/main.php');
-$application = new Application($config);
+$application = new Application($config);        //分析完成
 //$application = new yii\web\Application($config);
-$application->run();
+$application->run();                            //加载主要组件，运行默认控制器

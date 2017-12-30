@@ -26,12 +26,12 @@ class UrlRule extends \yii\web\UrlRule
     {
         $route = parent::parseRequest($manager, $request);
         //301,302跳转
-        if($route && in_array($this->urlMode,[301,302]))
-        {
+        if ($route && in_array($this->urlMode, [301, 302])) {
             if (strpos($route[0], 'http') !== 0) {
                 $route[0] = '/' . $route[0];
             }
-            \Yii::$app->getResponse()->redirect($route[0],$this->urlMode)->send();exit;
+            \Yii::$app->getResponse()->redirect($route[0], $this->urlMode)->send();
+            exit;
         }
         return $route;
     }
@@ -47,8 +47,7 @@ class UrlRule extends \yii\web\UrlRule
     public function createUrl($manager, $route, $params)
     {
         //301,302模式，不生成Url
-        if(in_array($this->urlMode,[301,302]))
-        {
+        if (in_array($this->urlMode, [301, 302])) {
             return false;
         }
         return parent::createUrl($manager, $route, $params);

@@ -32,21 +32,16 @@ class Request extends \yii\web\Request
      */
     public function _urlLangSet($url)
     {
-        if(strpos($url,'?'))
-        {
+        if (strpos($url, '?')) {
             $join = '&';
-        }
-        else
-        {
+        } else {
             $join = '?';
         }
-        preg_match('/^\/[a-z]{2}\//',$url,$arr);
-        if($arr[0])
-        {
-            $lang = substr($arr[0],1,-1);
-            if(!in_array($lang,['js']))
-            {
-                $url = preg_replace('/^\/[a-z]{2}\//','',$url);
+        preg_match('/^\/[a-z]{2}\//', $url, $arr);
+        if ($arr[0]) {
+            $lang = substr($arr[0], 1, -1);
+            if (!in_array($lang, ['js'])) {
+                $url = preg_replace('/^\/[a-z]{2}\//', '', $url);
                 $url .= $join . 'lang=' . $lang;
                 $_GET['lang'] = $lang;
             }
@@ -62,8 +57,7 @@ class Request extends \yii\web\Request
         $newUrl = str_replace('index.php?r=', '', $url);
         if ($newUrl != $url) {
             return str_replace('&', '?', $newUrl);
-        } else
-        {
+        } else {
             return $url;
         }
 

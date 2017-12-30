@@ -144,7 +144,7 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' =>false,     //false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
+            'useFileTransport' =>false,             //false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.qq.com',            //QQ代理
@@ -164,6 +164,5 @@ return [
         ],
         'assetManager' => $asset,           //资源加载
     ],
-
     'params' => $params,
 ];

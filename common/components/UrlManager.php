@@ -1,5 +1,6 @@
 <?php
 namespace common\components;
+
 use common\helpers\UrlHelp;
 use Yii;
 use yii\helpers\Url;
@@ -9,7 +10,6 @@ use yii\helpers\Url;
  * @package common\components
  * @desc 重写类，对路由解析和生成url路径做一些扩展
  */
-
 class UrlManager extends \yii\web\UrlManager
 {
 
@@ -51,19 +51,15 @@ class UrlManager extends \yii\web\UrlManager
             $pathInfo = $request->getPathInfo();
             $request->setPathInfo($pathInfo . '/');
             foreach ($this->rules as $rule) {
-                if($rule->suffix == '/')
-                {
+                if ($rule->suffix == '/') {
                     if (($result = $rule->parseRequest($this, $request)) !== false) {
-                        if($result[1])
-                        {
-                            array_unshift($result[1],$result[0]);
-                            $param =  $result[1];
-                        }
-                        else
-                        {
+                        if ($result[1]) {
+                            array_unshift($result[1], $result[0]);
+                            $param = $result[1];
+                        } else {
                             $param[0] = $result[0];
                         }
-                        return Yii::$app->getResponse()->redirect($this->createUrl($param),301)->send();
+                        return Yii::$app->getResponse()->redirect($this->createUrl($param), 301)->send();
                     }
                 }
             }
@@ -75,7 +71,7 @@ class UrlManager extends \yii\web\UrlManager
 
             Yii::trace('No matching URL rules. Using default URL parsing logic.', __METHOD__);
 
-            $suffix = (string) $this->suffix;
+            $suffix = (string)$this->suffix;
             if ($suffix !== '' && $pathInfo !== '') {
                 $n = strlen($this->suffix);
                 if (substr_compare($pathInfo, $this->suffix, -$n, $n) === 0) {
@@ -98,7 +94,7 @@ class UrlManager extends \yii\web\UrlManager
                 $route = '';
             }
 
-            return [(string) $route, []];
+            return [(string)$route, []];
         }
     }
 }

@@ -35,13 +35,10 @@ class AppTest extends Component
      */
     public function output($ret = 1)
     {
-        if($ret ==1)
-        {
-            return json_encode(['ret'=>1,'data'=>$this->data]);
-        }
-        else
-        {
-            return json_encode(['ret'=>$ret]);
+        if ($ret == 1) {
+            return json_encode(['ret' => 1, 'data' => $this->data]);
+        } else {
+            return json_encode(['ret' => $ret]);
         }
 
     }

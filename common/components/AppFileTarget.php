@@ -15,13 +15,13 @@ use yii\log\Target;
 /**
  * @desc 文件类型记录日志. 从老站群移动来的
  *
- * 文件记录都是以 @runtime/logs/Yii::$app->id/yyyymm/$level_dd.log 命名进行切割 
+ * 文件记录都是以 @runtime/logs/Yii::$app->id/yyyymm/$level_dd.log 命名进行切割
  * 每天一个文件 每个年月一个目录
  *
  * @author caoxl
  */
 class AppFileTarget extends Target
-{   
+{
     /**
      * @var string 基础日志目录
      */
@@ -65,12 +65,9 @@ class AppFileTarget extends Target
     {
         parent::init();
         $this->clearToEndMonth === null && $this->clearToEndMonth = date('Ym', strtotime('-2 month'));
-        if($this->baseLogDir === null)
-        {
+        if ($this->baseLogDir === null) {
             $this->baseLogDir = Yii::$app->getRuntimePath() . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR;
-        }
-        else
-        {
+        } else {
             $this->baseLogDir = Yii::getAlias($this->baseLogDir);
         }
 
@@ -87,51 +84,43 @@ class AppFileTarget extends Target
     public function export()
     {
         $logTypes = array(
-                            Logger::getLevelName(Logger::LEVEL_ERROR), 
-                            Logger::getLevelName(Logger::LEVEL_WARNING), 
-                            Logger::getLevelName(Logger::LEVEL_INFO), 
-                            Logger::getLevelName(Logger::LEVEL_TRACE), 
-                            'profile',
-                        );
+            Logger::getLevelName(Logger::LEVEL_ERROR),
+            Logger::getLevelName(Logger::LEVEL_WARNING),
+            Logger::getLevelName(Logger::LEVEL_INFO),
+            Logger::getLevelName(Logger::LEVEL_TRACE),
+            'profile',
+        );
         $_messages = array();//各种类型的日志
-        foreach ($logTypes as $key) 
-        {
+        foreach ($logTypes as $key) {
             !array_key_exists($key, $_messages) && $_messages[$key] = array(
-                'messages' => array(), 
+                'messages' => array(),
                 'text' => '',
             );
         }
 
-        foreach ($this->messages as $msg) 
-        {
+        foreach ($this->messages as $msg) {
             $_levelName = in_array($msg[1], array(Logger::LEVEL_PROFILE_BEGIN, Logger::LEVEL_PROFILE_END)) ? 'profile' : Logger::getLevelName($msg[1]);
             $_messages[$_levelName]['messages'][] = $msg;
         }
 
         $maxFileSizeInKb = $this->maxFileSize * 1024;
-        foreach ($logTypes as $type) 
-        {
+        foreach ($logTypes as $type) {
             $text = implode("\n", array_map([$this, 'formatMessage'], $_messages[$type]['messages']));
-            if($text == "\n" || $text == '' || $text == ' ' || $text == "\t" || $text == "\r" || $text == "\r\n" || $text == "\v")
-            {
+            if ($text == "\n" || $text == '' || $text == ' ' || $text == "\t" || $text == "\r" || $text == "\r\n" || $text == "\v") {
                 continue;
             }
             $file = $this->_logDir . $type . '.log';
-            if(is_file($file) && @filesize($file) >= $maxFileSizeInKb)
-            {//如果文件大小超过最大限制 采用新文件 如 'error_1.log','info_2.log'
-                for($i = 1; $i < 100000; $i++)
-                {
+            if (is_file($file) && @filesize($file) >= $maxFileSizeInKb) {//如果文件大小超过最大限制 采用新文件 如 'error_1.log','info_2.log'
+                for ($i = 1; $i < 100000; $i++) {
                     $file = str_replace('.log', '_' . $i . '.log', $file);
-                    if(!is_file($file))
-                    {
+                    if (!is_file($file)) {
                         break;
                     }
                 }
             }
 
-            if(($fp = @fopen($file, 'a')) === false)
-            {//打不开跳过
-                continue;   
+            if (($fp = @fopen($file, 'a')) === false) {//打不开跳过
+                continue;
             }
             @flock($fp, LOCK_EX);//锁定文件
 
@@ -139,8 +128,7 @@ class AppFileTarget extends Target
             @flock($fp, LOCK_UN);//释放锁定
             @fclose($fp);//关闭流
 
-            if($this->fileMode !== null)
-            {
+            if ($this->fileMode !== null) {
                 @chmod($this->logFile, $this->fileMode);//改变文件权限模式
             }
         }
@@ -155,21 +143,17 @@ class AppFileTarget extends Target
     {
         $mothNum = intval(date('Ym'));
         $this->clearToEndMonth = intval($this->clearToEndMonth);
-        if($this->clearToEndMonth >= $mothNum)
-        {//不能删除当月及以后的
+        if ($this->clearToEndMonth >= $mothNum) {//不能删除当月及以后的
             return;
         }
 
-        if(($dh = @opendir($this->baseLogDir)) !== false)
-        {
-            while(($file = @readdir($dh)) !== false)
-            {
+        if (($dh = @opendir($this->baseLogDir)) !== false) {
+            while (($file = @readdir($dh)) !== false) {
                 $realFile = $this->baseLogDir . DIRECTORY_SEPARATOR . $file;
-                if(!in_array($file, array('.', '..')) && is_dir($realFile) && intval($file) <= $this->clearToEndMonth)
-                {
+                if (!in_array($file, array('.', '..')) && is_dir($realFile) && intval($file) <= $this->clearToEndMonth) {
                     FileHelper::removeDirectory($realFile);
                 }
-            } 
+            }
         }
         @closedir($dh);
     }
